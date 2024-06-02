@@ -20,6 +20,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Insurance", "Insurance", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Host", "src\Insurance\Insurance.Host.csproj", "{2CA23A59-0B92-4D55-995A-18DCEEDB30D0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auditing", "Auditing", "{9E647657-43B2-4CEA-83C0-451F63EFB0AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auditing.Host", "src\Auditing\Auditing.Host\Auditing.Host.csproj", "{3D9AC29B-0027-48DA-8D73-0EBA362A4892}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +38,10 @@ Global
 		{2CA23A59-0B92-4D55-995A-18DCEEDB30D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CA23A59-0B92-4D55-995A-18DCEEDB30D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CA23A59-0B92-4D55-995A-18DCEEDB30D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D9AC29B-0027-48DA-8D73-0EBA362A4892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D9AC29B-0027-48DA-8D73-0EBA362A4892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D9AC29B-0027-48DA-8D73-0EBA362A4892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D9AC29B-0027-48DA-8D73-0EBA362A4892}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +50,8 @@ Global
 		{3030742B-12B5-468E-9DC1-F7BCD00343AB} = {449D6CF2-6FD7-48B8-B329-88831383EE2C}
 		{97B7B010-B851-49A2-9AB7-2B1C6066F69C} = {74BF3347-3F7D-4528-AFAA-BFB33F426B31}
 		{2CA23A59-0B92-4D55-995A-18DCEEDB30D0} = {97B7B010-B851-49A2-9AB7-2B1C6066F69C}
+		{9E647657-43B2-4CEA-83C0-451F63EFB0AE} = {74BF3347-3F7D-4528-AFAA-BFB33F426B31}
+		{3D9AC29B-0027-48DA-8D73-0EBA362A4892} = {9E647657-43B2-4CEA-83C0-451F63EFB0AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D4C1340-FBC4-4F35-944F-26237883E032}
