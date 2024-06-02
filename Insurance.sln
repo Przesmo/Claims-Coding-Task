@@ -14,7 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{74BF3347-3F7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{449D6CF2-6FD7-48B8-B329-88831383EE2C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Host", "src\Insurance\Insurance.Host.csproj", "{8E14FF4A-FD92-4490-A58C-906FFD31CF10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Tests", "tests\Claims.Tests\Insurance.Tests.csproj", "{3030742B-12B5-468E-9DC1-F7BCD00343AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Insurance", "Insurance", "{97B7B010-B851-49A2-9AB7-2B1C6066F69C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Host", "src\Insurance\Insurance.Host.csproj", "{2CA23A59-0B92-4D55-995A-18DCEEDB30D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,16 +26,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8E14FF4A-FD92-4490-A58C-906FFD31CF10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E14FF4A-FD92-4490-A58C-906FFD31CF10}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E14FF4A-FD92-4490-A58C-906FFD31CF10}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E14FF4A-FD92-4490-A58C-906FFD31CF10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3030742B-12B5-468E-9DC1-F7BCD00343AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3030742B-12B5-468E-9DC1-F7BCD00343AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3030742B-12B5-468E-9DC1-F7BCD00343AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3030742B-12B5-468E-9DC1-F7BCD00343AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CA23A59-0B92-4D55-995A-18DCEEDB30D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA23A59-0B92-4D55-995A-18DCEEDB30D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CA23A59-0B92-4D55-995A-18DCEEDB30D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CA23A59-0B92-4D55-995A-18DCEEDB30D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8E14FF4A-FD92-4490-A58C-906FFD31CF10} = {74BF3347-3F7D-4528-AFAA-BFB33F426B31}
+		{3030742B-12B5-468E-9DC1-F7BCD00343AB} = {449D6CF2-6FD7-48B8-B329-88831383EE2C}
+		{97B7B010-B851-49A2-9AB7-2B1C6066F69C} = {74BF3347-3F7D-4528-AFAA-BFB33F426B31}
+		{2CA23A59-0B92-4D55-995A-18DCEEDB30D0} = {97B7B010-B851-49A2-9AB7-2B1C6066F69C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D4C1340-FBC4-4F35-944F-26237883E032}
