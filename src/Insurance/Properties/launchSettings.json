@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Claims": {
+    "Insurance.Host": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

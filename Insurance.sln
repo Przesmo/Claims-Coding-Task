@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8CFB0A29-7BAB-4D83-8A3E-7E5ECFC5A8BB}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		docker-compose.yml = docker-compose.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{74BF3347-3F7D-4528-AFAA-BFB33F426B31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{449D6CF2-6FD7-48B8-B329-88831383EE2C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Host", "src\Insurance\Insurance.Host.csproj", "{8E14FF4A-FD92-4490-A58C-906FFD31CF10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E14FF4A-FD92-4490-A58C-906FFD31CF10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E14FF4A-FD92-4490-A58C-906FFD31CF10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E14FF4A-FD92-4490-A58C-906FFD31CF10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E14FF4A-FD92-4490-A58C-906FFD31CF10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8E14FF4A-FD92-4490-A58C-906FFD31CF10} = {74BF3347-3F7D-4528-AFAA-BFB33F426B31}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D4C1340-FBC4-4F35-944F-26237883E032}
+	EndGlobalSection
+EndGlobal
