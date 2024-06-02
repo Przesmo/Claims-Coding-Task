@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auditing.Host", "src\Auditi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auditing.Infrastructure", "src\Auditing\Auditing.Infrastructure\Auditing.Infrastructure.csproj", "{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Infrastructure", "src\Insurance\Insurance.Infrastructure\Insurance.Infrastructure.csproj", "{68202DED-7EC0-474C-B9A0-CBFFD311B6CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68202DED-7EC0-474C-B9A0-CBFFD311B6CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68202DED-7EC0-474C-B9A0-CBFFD311B6CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68202DED-7EC0-474C-B9A0-CBFFD311B6CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68202DED-7EC0-474C-B9A0-CBFFD311B6CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{9E647657-43B2-4CEA-83C0-451F63EFB0AE} = {74BF3347-3F7D-4528-AFAA-BFB33F426B31}
 		{3D9AC29B-0027-48DA-8D73-0EBA362A4892} = {9E647657-43B2-4CEA-83C0-451F63EFB0AE}
 		{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7} = {9E647657-43B2-4CEA-83C0-451F63EFB0AE}
+		{68202DED-7EC0-474C-B9A0-CBFFD311B6CE} = {97B7B010-B851-49A2-9AB7-2B1C6066F69C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D4C1340-FBC4-4F35-944F-26237883E032}
