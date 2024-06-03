@@ -20,6 +20,7 @@ public class CoversController : ControllerBase
     }
 
     [HttpPost("compute")]
+    //To Do: Why Post not get?
     public async Task<ActionResult> ComputePremiumAsync(DateTime startDate, DateTime endDate, CoverType coverType)
     {
         return Ok(ComputePremium(startDate, endDate, coverType));

@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.EntityFrameworkCore" Version="7.0.0-preview.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Auditing\Auditing.Infrastructure\Auditing.Infrastructure.csproj" />
+    <ProjectReference Include="..\Insurance.Infrastructure\Insurance.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
