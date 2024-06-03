@@ -1,4 +1,5 @@
-﻿using Claims;
+﻿using Insurance.Infrastructure.Repositories.Claims;
+using Insurance.Infrastructure.Repositories.Covers;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.EntityFrameworkCore.Extensions;
 

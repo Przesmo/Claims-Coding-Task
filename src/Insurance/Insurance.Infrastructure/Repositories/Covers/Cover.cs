@@ -1,6 +1,6 @@
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Claims;
+namespace Insurance.Infrastructure.Repositories.Covers;
 
 public class Cover
 {

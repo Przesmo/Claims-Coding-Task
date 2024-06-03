@@ -2,15 +2,15 @@ using Claims.Auditing;
 using Insurance.Infrastructure.Repositories.Claims;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Claims.Controllers;
+namespace Insurance.Host.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 public class ClaimsController : ControllerBase
 {
-    private readonly ILogger<ClaimsController> _logger;
     private readonly IClaimsRepository _claimsRepository;
     private readonly Auditer _auditer;
+    private readonly ILogger<ClaimsController> _logger;
 
     public ClaimsController(
         IClaimsRepository claimsContext,

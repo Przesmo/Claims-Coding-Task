@@ -1,5 +1,4 @@
-﻿using Claims;
-using Insurance.Infrastructure.Repositories.Database;
+﻿using Insurance.Infrastructure.Repositories.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Insurance.Infrastructure.Repositories.Claims;

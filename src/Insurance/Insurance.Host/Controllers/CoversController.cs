@@ -2,7 +2,7 @@ using Claims.Auditing;
 using Insurance.Infrastructure.Repositories.Covers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Claims.Controllers;
+namespace Insurance.Host.Controllers;
 
 [ApiController]
 [Route("[controller]")]

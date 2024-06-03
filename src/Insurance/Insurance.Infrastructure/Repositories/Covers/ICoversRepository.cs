@@ -1,6 +1,4 @@
-﻿using Claims;
-
-namespace Insurance.Infrastructure.Repositories.Covers;
+﻿namespace Insurance.Infrastructure.Repositories.Covers;
 
 public interface ICoversRepository
 {
