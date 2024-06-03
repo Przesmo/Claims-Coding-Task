@@ -24,16 +24,17 @@ public class ClaimsController : ControllerBase
 
     [HttpGet]
     //To Do: Do some pagination
-    public async Task<IEnumerable<Claim>> GetAsync()
+    public async Task<IEnumerable<Claim>> GetAllAsync()
     {
-        return await _claimsRepository.GetAsync();
+        return await _claimsRepository.GetAllAsync();
     }
 
     [HttpPost]
+    //To Do: Standarize when Action result when Task are returned etc.
     public async Task<ActionResult> CreateAsync(Claim claim)
     {
         claim.Id = Guid.NewGuid().ToString();
-        await _claimsRepository.AddAsync(claim);
+        await _claimsRepository.CreateAsync(claim);
         _auditer.AuditClaim(claim.Id, "POST");
         return Ok(claim);
     }
@@ -41,8 +42,8 @@ public class ClaimsController : ControllerBase
     [HttpDelete("{id}")]
     public async Task DeleteAsync(string id)
     {
-        _auditer.AuditClaim(id, "DELETE");
         await _claimsRepository.DeleteAsync(id);
+        _auditer.AuditClaim(id, "DELETE");
     }
 
     [HttpGet("{id}")]

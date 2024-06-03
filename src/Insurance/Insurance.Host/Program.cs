@@ -36,6 +36,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+//ToDo: Move it to its own project
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AuditContext>();

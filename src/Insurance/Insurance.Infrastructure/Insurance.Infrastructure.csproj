@@ -7,6 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.EntityFrameworkCore" Version="7.0.0-preview.1" />
+    <PackageReference Include="MongoDB.EntityFrameworkCore" Version="8.0.1" />
   </ItemGroup>
 </Project>

@@ -2,35 +2,35 @@
 using Insurance.Infrastructure.Repositories.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace Insurance.Infrastructure.Repositories.Claims;
+namespace Insurance.Infrastructure.Repositories.Covers;
 
-internal class ClaimsRepository : IClaimsRepository
+internal class CoversRepository : ICoversRepository
 {
     private readonly InsuranceContext _context;
 
-    public ClaimsRepository(InsuranceContext context)
+    public CoversRepository(InsuranceContext context)
     {
         _context = context;
     }
 
-    public async Task<IEnumerable<Claim>> GetAllAsync()
+    public async Task<IEnumerable<Cover>> GetAllAsync()
     {
-        return await _context.Claims
+        return await _context.Covers
             .AsNoTracking()
             .ToListAsync();
     }
 
-    public async Task<Claim> GetAsync(string id)
+    public async Task<Cover> GetAsync(string id)
     {
-        return await _context.Claims
+        return await _context.Covers
             .AsNoTracking()
             .Where(claim => claim.Id == id)
             .SingleOrDefaultAsync();
     }
 
-    public async Task CreateAsync(Claim claim)
+    public async Task CreateAsync(Cover cover)
     {
-        _context.Claims.Add(claim);
+        _context.Covers.Add(cover);
         await _context.SaveChangesAsync();
     }
 
@@ -39,7 +39,7 @@ internal class ClaimsRepository : IClaimsRepository
         var claim = await GetAsync(id);
         if (claim is not null)
         {
-            _context.Claims.Remove(claim);
+            _context.Covers.Remove(claim);
             await _context.SaveChangesAsync();
         }
     }

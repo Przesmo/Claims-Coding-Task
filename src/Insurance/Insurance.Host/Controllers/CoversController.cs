@@ -1,6 +1,6 @@
 using Claims.Auditing;
+using Insurance.Infrastructure.Repositories.Covers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Claims.Controllers;
 
@@ -8,15 +8,18 @@ namespace Claims.Controllers;
 [Route("[controller]")]
 public class CoversController : ControllerBase
 {
-    private readonly ClaimsContext _claimsContext;
-    private readonly ILogger<CoversController> _logger;
+    private readonly ICoversRepository _coversRepository;
     private readonly Auditer _auditer;
+    private readonly ILogger<CoversController> _logger;
 
-    public CoversController(ClaimsContext claimsContext, AuditContext auditContext, ILogger<CoversController> logger)
+    public CoversController(
+        ICoversRepository coversRepository,
+        AuditContext auditContext,
+        ILogger<CoversController> logger)
     {
-        _claimsContext = claimsContext;
-        _logger = logger;
+        _coversRepository = coversRepository;
         _auditer = new Auditer(auditContext);
+        _logger = logger;
     }
 
     [HttpPost("compute")]
@@ -27,17 +30,18 @@ public class CoversController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Cover>>> GetAsync()
+    //To Do: Pagination
+    public async Task<ActionResult<IEnumerable<Cover>>> GetAllAsync()
     {
-        var results = await _claimsContext.Covers.ToListAsync();
+        var results = await _coversRepository.GetAllAsync();
         return Ok(results);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Cover>> GetAsync(string id)
+    //To Do: check if it will return 404 when resource is not found
+    public async Task<Cover> GetAsync(string id)
     {
-        var results = await _claimsContext.Covers.ToListAsync();
-        return Ok(results.SingleOrDefault(cover => cover.Id == id));
+        return await _coversRepository.GetAsync(id);
     }
 
     [HttpPost]
@@ -45,8 +49,7 @@ public class CoversController : ControllerBase
     {
         cover.Id = Guid.NewGuid().ToString();
         cover.Premium = ComputePremium(cover.StartDate, cover.EndDate, cover.Type);
-        _claimsContext.Covers.Add(cover);
-        await _claimsContext.SaveChangesAsync();
+        await _coversRepository.CreateAsync(cover);
         _auditer.AuditCover(cover.Id, "POST");
         return Ok(cover);
     }
@@ -54,13 +57,8 @@ public class CoversController : ControllerBase
     [HttpDelete("{id}")]
     public async Task DeleteAsync(string id)
     {
-        _auditer.AuditCover(id, "DELETE");
-        var cover = await _claimsContext.Covers.Where(cover => cover.Id == id).SingleOrDefaultAsync();
-        if (cover is not null)
-        {
-            _claimsContext.Covers.Remove(cover);
-            await _claimsContext.SaveChangesAsync();
-        }
+        await _coversRepository.DeleteAsync(id);
+        _auditer.AuditClaim(id, "DELETE");
     }
 
     private decimal ComputePremium(DateTime startDate, DateTime endDate, CoverType coverType)

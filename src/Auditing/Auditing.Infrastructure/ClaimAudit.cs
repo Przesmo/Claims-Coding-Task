@@ -9,5 +9,7 @@
         public DateTime Created { get; set; }
 
         public string? HttpRequestType { get; set; }
+
+        //To Do: think about some transaction/correlation id to store as well
     }
 }
