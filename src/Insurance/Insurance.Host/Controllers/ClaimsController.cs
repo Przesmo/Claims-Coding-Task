@@ -27,7 +27,7 @@ public class ClaimsController : ControllerBase
     //To Do: Do some pagination
     public async Task<IEnumerable<Claim>> GetAllAsync([FromQuery]GetClaims query)
     {
-        return await _claimsRepository.GetAllAsync();
+        return await _claimsRepository.GetAllAsync(query.Offset, query.Limit);
     }
 
     [HttpPost]

@@ -12,10 +12,12 @@ internal class CoversRepository : ICoversRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Cover>> GetAllAsync()
+    public async Task<IEnumerable<Cover>> GetAllAsync(int offset, int limit)
     {
         return await _context.Covers
             .AsNoTracking()
+            .Skip(offset)
+            .Take(limit)
             .ToListAsync();
     }
 
