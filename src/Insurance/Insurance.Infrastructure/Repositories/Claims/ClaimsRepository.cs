@@ -12,10 +12,12 @@ internal class ClaimsRepository : IClaimsRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Claim>> GetAllAsync()
+    public async Task<IEnumerable<Claim>> GetAllAsync(int offset, int limit)
     {
         return await _context.Claims
             .AsNoTracking()
+            .Skip(offset)
+            .Take(limit)
             .ToListAsync();
     }
 

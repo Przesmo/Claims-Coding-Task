@@ -1,4 +1,5 @@
 using Claims.Auditing;
+using Insurance.Host.Messages.Queries;
 using Insurance.Infrastructure.Repositories.Claims;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +25,7 @@ public class ClaimsController : ControllerBase
 
     [HttpGet]
     //To Do: Do some pagination
-    public async Task<IEnumerable<Claim>> GetAllAsync()
+    public async Task<IEnumerable<Claim>> GetAllAsync([FromQuery]GetClaims query)
     {
         return await _claimsRepository.GetAllAsync();
     }
