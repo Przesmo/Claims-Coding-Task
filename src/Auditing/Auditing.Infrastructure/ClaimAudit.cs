@@ -1,15 +1,14 @@
-﻿namespace Claims.Auditing
+﻿namespace Auditing.Infrastructure;
+
+public class ClaimAudit
 {
-    public class ClaimAudit
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public string? ClaimId { get; set; }
+    public string? ClaimId { get; set; }
 
-        public DateTime Created { get; set; }
+    public DateTime Created { get; set; }
 
-        public string? HttpRequestType { get; set; }
+    public string? HttpRequestType { get; set; }
 
-        //To Do: think about some transaction/correlation id to store as well
-    }
+    //To Do: think about some transaction/correlation id to store as well
 }

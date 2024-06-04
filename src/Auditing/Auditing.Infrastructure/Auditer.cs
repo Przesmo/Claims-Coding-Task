@@ -1,38 +1,37 @@
-﻿namespace Claims.Auditing
+﻿namespace Auditing.Infrastructure;
+
+public class Auditer
 {
-    public class Auditer
+    private readonly AuditContext _auditContext;
+
+    public Auditer(AuditContext auditContext)
     {
-        private readonly AuditContext _auditContext;
+        _auditContext = auditContext;
+    }
 
-        public Auditer(AuditContext auditContext)
+    public void AuditClaim(string id, string httpRequestType)
+    {
+        var claimAudit = new ClaimAudit()
         {
-            _auditContext = auditContext;
-        }
+            Created = DateTime.Now,
+            HttpRequestType = httpRequestType,
+            ClaimId = id
+        };
 
-        public void AuditClaim(string id, string httpRequestType)
+        _auditContext.Add(claimAudit);
+        _auditContext.SaveChanges();
+    }
+
+    public void AuditCover(string id, string httpRequestType)
+    {
+        var coverAudit = new CoverAudit()
         {
-            var claimAudit = new ClaimAudit()
-            {
-                Created = DateTime.Now,
-                HttpRequestType = httpRequestType,
-                ClaimId = id
-            };
+            Created = DateTime.Now,
+            HttpRequestType = httpRequestType,
+            CoverId = id
+        };
 
-            _auditContext.Add(claimAudit);
-            _auditContext.SaveChanges();
-        }
-        
-        public void AuditCover(string id, string httpRequestType)
-        {
-            var coverAudit = new CoverAudit()
-            {
-                Created = DateTime.Now,
-                HttpRequestType = httpRequestType,
-                CoverId = id
-            };
-
-            _auditContext.Add(coverAudit);
-            _auditContext.SaveChanges();
-        }
+        _auditContext.Add(coverAudit);
+        _auditContext.SaveChanges();
     }
 }

@@ -1,7 +1,7 @@
-using Claims.Auditing;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Insurance.Infrastructure.Repositories;
+using Auditing.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 

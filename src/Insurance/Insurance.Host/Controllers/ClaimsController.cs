@@ -1,4 +1,4 @@
-using Claims.Auditing;
+using Auditing.Infrastructure;
 using Insurance.Host.Messages.Queries;
 using Insurance.Infrastructure.Repositories.Claims;
 using Microsoft.AspNetCore.Mvc;
