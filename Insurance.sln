@@ -18,15 +18,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Insurance", "Insurance", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auditing", "Auditing", "{9E647657-43B2-4CEA-83C0-451F63EFB0AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auditing.Host", "src\Auditing\Auditing.Host\Auditing.Host.csproj", "{3D9AC29B-0027-48DA-8D73-0EBA362A4892}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auditing.Host", "src\Auditing\Auditing.Host\Auditing.Host.csproj", "{3D9AC29B-0027-48DA-8D73-0EBA362A4892}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auditing.Infrastructure", "src\Auditing\Auditing.Infrastructure\Auditing.Infrastructure.csproj", "{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auditing.Infrastructure", "src\Auditing\Auditing.Infrastructure\Auditing.Infrastructure.csproj", "{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Tests", "tests\Insurance.Tests\Insurance.Tests.csproj", "{C44B350F-8670-4BF0-8D87-83D3E6515A7E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Host", "src\Insurance\Insurance.Host\Insurance.Host.csproj", "{87300115-072D-4C87-8FF5-69BC84E66227}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Infrastructure", "src\Insurance\Insurance.Infrastructure\Insurance.Infrastructure.csproj", "{B443D21D-81AC-460D-9358-FDF747563A36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Infrastructure", "src\Insurance\Insurance.Infrastructure\Insurance.Infrastructure.csproj", "{B443D21D-81AC-460D-9358-FDF747563A36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Application", "src\Insurance\Insurance.Application\Insurance.Application.csproj", "{A4F99873-DD75-4742-8416-66B1F04341DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Application.Tests", "tests\Insurance.Application.Tests\Insurance.Application.Tests.csproj", "{EF66A3B5-D662-4124-93C0-34009EF8E1B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +58,14 @@ Global
 		{B443D21D-81AC-460D-9358-FDF747563A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B443D21D-81AC-460D-9358-FDF747563A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B443D21D-81AC-460D-9358-FDF747563A36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4F99873-DD75-4742-8416-66B1F04341DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4F99873-DD75-4742-8416-66B1F04341DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4F99873-DD75-4742-8416-66B1F04341DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4F99873-DD75-4742-8416-66B1F04341DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF66A3B5-D662-4124-93C0-34009EF8E1B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF66A3B5-D662-4124-93C0-34009EF8E1B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF66A3B5-D662-4124-93C0-34009EF8E1B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF66A3B5-D662-4124-93C0-34009EF8E1B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +78,8 @@ Global
 		{C44B350F-8670-4BF0-8D87-83D3E6515A7E} = {449D6CF2-6FD7-48B8-B329-88831383EE2C}
 		{87300115-072D-4C87-8FF5-69BC84E66227} = {97B7B010-B851-49A2-9AB7-2B1C6066F69C}
 		{B443D21D-81AC-460D-9358-FDF747563A36} = {97B7B010-B851-49A2-9AB7-2B1C6066F69C}
+		{A4F99873-DD75-4742-8416-66B1F04341DE} = {97B7B010-B851-49A2-9AB7-2B1C6066F69C}
+		{EF66A3B5-D662-4124-93C0-34009EF8E1B1} = {449D6CF2-6FD7-48B8-B329-88831383EE2C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D4C1340-FBC4-4F35-944F-26237883E032}

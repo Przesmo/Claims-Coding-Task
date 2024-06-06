@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Auditing\Auditing.Infrastructure\Auditing.Infrastructure.csproj" />
+    <ProjectReference Include="..\Insurance.Application\Insurance.Application.csproj" />
     <ProjectReference Include="..\Insurance.Infrastructure\Insurance.Infrastructure.csproj" />
   </ItemGroup>
 
