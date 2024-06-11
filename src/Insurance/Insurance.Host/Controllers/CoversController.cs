@@ -55,9 +55,9 @@ public class CoversController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task DeleteAsync(string id)
+    public async Task DeleteAsync([FromRoute] DeleteCover command)
     {
-        await _coversRepository.DeleteAsync(id);
-        _auditer.AuditClaim(id, "DELETE");
+        await _coversService.DeleteAsync(command);
+        _auditer.AuditClaim(command.Id, "DELETE");
     }
 }

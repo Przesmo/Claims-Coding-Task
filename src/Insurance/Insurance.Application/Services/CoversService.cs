@@ -69,6 +69,11 @@ public class CoversService : ICoversService
         return new CoverDTO(cover.Id, cover.StartDate, cover.EndDate, cover.Type, cover.Premium);
     }
 
+    public async Task DeleteAsync(DeleteCover command)
+    {
+        await _coversRepository.DeleteAsync(command.Id);
+    }
+
     public async Task<IEnumerable<CoverDTO>> GetAllAsync(GetCovers query) =>
         (await _coversRepository.GetAllAsync(query.Offset, query.Limit))
             .Select(x => new CoverDTO(x.Id, x.StartDate, x.EndDate, x.Type, x.Premium));

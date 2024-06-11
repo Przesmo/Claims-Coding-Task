@@ -12,4 +12,5 @@ public interface ICoversService
     Task<IEnumerable<CoverDTO>> GetAllAsync(GetCovers query);
     Task<CoverDTO> GetAsync(GetCover query);
     Task<CoverDTO> CreateAsync(CreateCover command);
+    Task DeleteAsync(DeleteCover command);
 }
