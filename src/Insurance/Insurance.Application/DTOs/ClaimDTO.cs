@@ -3,11 +3,4 @@
 namespace Insurance.Application.DTOs;
 
 //ToDo: Think aboout placement ClaimType
-public record ClaimDTO(DateTime Created, ClaimType Type, decimal DamageCost)
-{
-    public string Id { get; set; } = null!;
-
-    public string CoverId { get; set; } = null!;
-
-    public string Name { get; set; } = null!;
-}
+public record ClaimDTO(string Id, string CoverId, string Name, DateTime Created, ClaimType Type, decimal DamageCost);

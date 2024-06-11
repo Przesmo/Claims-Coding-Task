@@ -44,12 +44,7 @@ public class ClaimsService : IClaimsService
         await _claimsRepository.CreateAsync(claim);
         _auditer.AuditClaim(claim.Id, "POST");
 
-        return new ClaimDTO(claim.Created, claim.Type, claim.DamageCost)
-        {
-            Id = claim.Id,
-            Name = claim.Name,
-            CoverId = claim.CoverId
-        };
+        return new ClaimDTO(claim.Id, claim.CoverId, claim.Name, claim.Created, claim.Type, claim.DamageCost);
     }
 
     public async Task DeleteAsync(DeleteClaim command)
@@ -60,24 +55,13 @@ public class ClaimsService : IClaimsService
 
     public async Task<IEnumerable<ClaimDTO>> GetAllAsync(GetClaims query) =>
         (await _claimsRepository.GetAllAsync(query.Offset, query.Limit))
-            //ToDo: It doesn't look nice having constructor and setting props
-            .Select(x => new ClaimDTO(x.Created, x.Type, x.DamageCost)
-            {
-                CoverId = x.CoverId,
-                Id = x.Id,
-                Name = x.Name,
-            });
+            .Select(x => new ClaimDTO(x.Id, x.CoverId, x.Name, x.Created, x.Type, x.DamageCost));
 
     //ToDo: Fix handling null
     //ToDo: Improve Mapping
     public async Task<ClaimDTO> GetAsync(GetClaim query)
     {
         var claim = await _claimsRepository.GetAsync(query.Id);
-        return new ClaimDTO(claim.Created, claim.Type, claim.DamageCost)
-        {
-            Id = claim.Id,
-            CoverId = claim.CoverId,
-            Name = claim.Name,
-        };
+        return new ClaimDTO(claim.Id, claim.CoverId, claim.Name, claim.Created, claim.Type, claim.DamageCost);
     }
 }

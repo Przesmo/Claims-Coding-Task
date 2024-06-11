@@ -2,7 +2,4 @@
 
 namespace Insurance.Application.DTOs;
 
-public record CoverDTO(DateTime StartDate, DateTime EndDate, CoverType Type, decimal Premium)
-{
-    public string Id { get; set; } = null!;
-}
+public record CoverDTO(string Id, DateTime StartDate, DateTime EndDate, CoverType Type, decimal Premium);

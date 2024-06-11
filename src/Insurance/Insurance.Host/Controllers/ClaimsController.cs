@@ -1,4 +1,3 @@
-using Auditing.Infrastructure;
 using Insurance.Application.DTOs;
 using Insurance.Application.Exceptions;
 using Insurance.Application.Messages.Commands;
@@ -13,7 +12,7 @@ namespace Insurance.Host.Controllers;
 public class ClaimsController : ControllerBase
 {
     private readonly IClaimsService _claimsService;
-    
+
     private readonly ILogger<ClaimsController> _logger;
 
     public ClaimsController(
