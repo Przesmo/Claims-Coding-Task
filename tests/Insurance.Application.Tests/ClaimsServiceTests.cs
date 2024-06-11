@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Insurance.Application.Exceptions;
+using Insurance.Application.Messages.Commands;
 using Insurance.Application.Services;
-using Insurance.Host.Messages.Commands;
 using Insurance.Infrastructure.Repositories.Claims;
 using Moq;
 using Xunit;

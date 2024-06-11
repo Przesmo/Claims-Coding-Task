@@ -1,4 +1,4 @@
-﻿namespace Insurance.Host.Messages.Queries;
+﻿namespace Insurance.Application.Messages.Queries;
 
 // ToDo: Add validation
 public class GetCovers

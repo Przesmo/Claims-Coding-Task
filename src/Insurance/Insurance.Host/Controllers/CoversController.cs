@@ -1,5 +1,5 @@
 using Auditing.Infrastructure;
-using Insurance.Host.Messages.Queries;
+using Insurance.Application.Messages.Queries;
 using Insurance.Infrastructure.Repositories.Covers;
 using Microsoft.AspNetCore.Mvc;
 

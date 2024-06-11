@@ -1,7 +1,7 @@
 ﻿using Insurance.Infrastructure.Repositories.Claims;
 using System.ComponentModel.DataAnnotations;
 
-namespace Insurance.Host.Messages.Commands;
+namespace Insurance.Application.Messages.Commands;
 
 public class CreateClaim
 {

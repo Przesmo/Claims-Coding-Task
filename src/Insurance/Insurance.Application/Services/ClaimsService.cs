@@ -1,7 +1,7 @@
 ﻿using Insurance.Application.DTOs;
 using Insurance.Application.Exceptions;
-using Insurance.Host.Messages.Commands;
-using Insurance.Host.Messages.Queries;
+using Insurance.Application.Messages.Commands;
+using Insurance.Application.Messages.Queries;
 using Insurance.Infrastructure.Repositories.Claims;
 
 namespace Insurance.Application.Services;
@@ -46,6 +46,9 @@ public class ClaimsService : IClaimsService
         };
     }
 
+    public async Task DeleteAsync(DeleteClaim command) =>
+        await _claimsRepository.DeleteAsync(command.Id);
+
     public async Task<IEnumerable<ClaimDTO>> GetAllAsync(GetClaims query) =>
         (await _claimsRepository.GetAllAsync(query.Offset, query.Limit))
             //ToDo: It doesn't look nice having constructor and setting props
@@ -55,4 +58,17 @@ public class ClaimsService : IClaimsService
                 Id = x.Id,
                 Name = x.Name,
             });
+
+    //ToDo: Fix handling null
+    //ToDo: Improve Mapping
+    public async Task<ClaimDTO> GetAsync(GetClaim query)
+    {
+        var claim = await _claimsRepository.GetAsync(query.Id);
+        return new ClaimDTO(claim.Created, claim.Type, claim.DamageCost)
+        {
+            Id = claim.Id,
+            CoverId = claim.CoverId,
+            Name = claim.Name,
+        };
+    }
 }
