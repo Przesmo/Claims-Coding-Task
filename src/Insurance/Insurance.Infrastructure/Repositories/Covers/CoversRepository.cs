@@ -21,13 +21,10 @@ internal class CoversRepository : ICoversRepository
             .ToListAsync();
     }
 
-    public async Task<Cover> GetAsync(string id)
-    {
-        return await _context.Covers
+    public async Task<Cover?> GetAsync(string id) =>
+        await _context.Covers
             .AsNoTracking()
-            .Where(claim => claim.Id == id)
-            .SingleOrDefaultAsync();
-    }
+            .FirstOrDefaultAsync(claim => claim.Id == id);
 
     public async Task CreateAsync(Cover cover)
     {

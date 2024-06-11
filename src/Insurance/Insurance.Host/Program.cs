@@ -1,13 +1,15 @@
+using Auditing.Infrastructure;
+using Insurance.Application;
+using Insurance.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-using Insurance.Infrastructure.Repositories;
-using Auditing.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services
     .RegisterRepositories(builder.Configuration.GetConnectionString("MongoDb"), builder.Configuration["MongoDb:DatabaseName"])
+    .RegisterApplication()
     .AddControllers()
     .AddJsonOptions(x =>
     {

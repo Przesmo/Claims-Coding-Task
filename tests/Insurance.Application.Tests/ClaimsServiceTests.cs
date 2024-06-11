@@ -1,5 +1,4 @@
-﻿
-using FluentAssertions;
+﻿using FluentAssertions;
 using Insurance.Application.Services;
 using Insurance.Host.Messages.Commands;
 using Insurance.Infrastructure.Repositories.Claims;

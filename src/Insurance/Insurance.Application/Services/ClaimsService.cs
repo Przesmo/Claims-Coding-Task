@@ -27,14 +27,11 @@ public class ClaimsService : IClaimsService
 
         await _claimsRepository.CreateAsync(claim);
 
-        return new ClaimDTO
+        return new ClaimDTO(claim.Created, claim.Type, claim.DamageCost)
         {
             Id = claim.Id,
-            DamageCost = claim.DamageCost,
-            Type = claim.Type,
             Name = claim.Name,
-            CoverId = claim.CoverId,
-            Created = claim.Created
+            CoverId = claim.CoverId
         };
     }
 }

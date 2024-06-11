@@ -7,6 +7,7 @@ namespace Insurance.Host.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+//ToDo: Add simple architecture tests
 public class CoversController : ControllerBase
 {
     private readonly ICoversRepository _coversRepository;
