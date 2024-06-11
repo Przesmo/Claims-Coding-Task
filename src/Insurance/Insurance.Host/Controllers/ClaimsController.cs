@@ -1,4 +1,5 @@
 using Auditing.Infrastructure;
+using Insurance.Application.DTOs;
 using Insurance.Application.Exceptions;
 using Insurance.Application.Services;
 using Insurance.Host.Messages.Commands;
@@ -31,9 +32,9 @@ public class ClaimsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Claim>> GetAllAsync([FromQuery] GetClaims query)
+    public async Task<IEnumerable<ClaimDTO>> GetAllAsync([FromQuery] GetClaims query)
     {
-        return await _claimsRepository.GetAllAsync(query.Offset, query.Limit);
+        return await _claimsService.GetAllAsync(query);
     }
 
     [HttpPost]

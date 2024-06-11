@@ -1,6 +1,7 @@
 ﻿using Insurance.Application.DTOs;
 using Insurance.Application.Exceptions;
 using Insurance.Host.Messages.Commands;
+using Insurance.Host.Messages.Queries;
 using Insurance.Infrastructure.Repositories.Claims;
 
 namespace Insurance.Application.Services;
@@ -44,4 +45,14 @@ public class ClaimsService : IClaimsService
             CoverId = claim.CoverId
         };
     }
+
+    public async Task<IEnumerable<ClaimDTO>> GetAllAsync(GetClaims query) =>
+        (await _claimsRepository.GetAllAsync(query.Offset, query.Limit))
+            //ToDo: It doesn't look nice having constructor and setting props
+            .Select(x => new ClaimDTO(x.Created, x.Type, x.DamageCost)
+            {
+                CoverId = x.CoverId,
+                Id = x.Id,
+                Name = x.Name,
+            });
 }
