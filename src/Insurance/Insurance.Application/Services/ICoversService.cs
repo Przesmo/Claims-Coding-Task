@@ -9,4 +9,5 @@ public interface ICoversService
     Task<bool> IsDateCoveredAsync(string coverId, DateTime date);
     decimal ComputePremium(ComputePremium query);
     Task<IEnumerable<CoverDTO>> GetAllAsync(GetCovers query);
+    Task<CoverDTO> GetAsync(GetCover query);
 }
