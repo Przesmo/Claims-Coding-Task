@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Auditing.Infrastructure;
+using FluentAssertions;
 using Insurance.Application.Exceptions;
 using Insurance.Application.Messages.Commands;
 using Insurance.Application.Services;
@@ -13,11 +14,12 @@ public class ClaimsServiceTests
     private readonly IClaimsService _claimsService;
     private readonly Mock<IClaimsRepository> _claimsRepositoryMock = new();
     private readonly Mock<ICoversService> _coversServiceMock = new();
+    private readonly Mock<IAuditer> _auditerMock = new();
 
     public ClaimsServiceTests()
     {
         _claimsService = new ClaimsService(
-            _claimsRepositoryMock.Object, _coversServiceMock.Object);
+            _claimsRepositoryMock.Object, _coversServiceMock.Object, _auditerMock.Object);
     }
 
     [Fact]
@@ -47,6 +49,30 @@ public class ClaimsServiceTests
         result.DamageCost.Should().Be(command.DamageCost);
         result.Name.Should().Be(command.Name);
         result.Type.Should().Be(command.Type);
+    }
+
+    [Fact]
+    public async Task CreateAsync_WhenCoveredAndCreatedNewClaim_ShouldAuditLog()
+    {
+        // Arrange
+        var command = new CreateClaim
+        {
+            CoverId = "123",
+            Created = DateTime.UtcNow,
+            DamageCost = 1,
+            Name = "Name",
+            Type = ClaimType.Fire
+        };
+        _coversServiceMock.Setup(x => x.IsDateCoveredAsync(command.CoverId, command.Created))
+            .ReturnsAsync(true);
+        _claimsRepositoryMock.Setup(x => x.CreateAsync(It.IsAny<Claim>()))
+            .Returns(Task.CompletedTask);
+
+        // Act
+        var result = await _claimsService.CreateAsync(command);
+
+        // Assert
+        _auditerMock.Verify(x => x.AuditClaim(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
     }
 
     [Fact]

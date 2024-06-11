@@ -1,4 +1,5 @@
-﻿using Insurance.Application.DTOs;
+﻿using Auditing.Infrastructure;
+using Insurance.Application.DTOs;
 using Insurance.Application.Exceptions;
 using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
@@ -6,16 +7,20 @@ using Insurance.Infrastructure.Repositories.Claims;
 
 namespace Insurance.Application.Services;
 
-//ToDo: Add architecture tests
 public class ClaimsService : IClaimsService
 {
     private readonly IClaimsRepository _claimsRepository;
     private readonly ICoversService _coversService;
+    private readonly IAuditer _auditer;
 
-    public ClaimsService(IClaimsRepository claimsRepository, ICoversService coversService)
+    public ClaimsService(
+        IClaimsRepository claimsRepository,
+        ICoversService coversService,
+        IAuditer auditer)
     {
         _claimsRepository = claimsRepository;
         _coversService = coversService;
+        _auditer = auditer;
     }
 
     public async Task<ClaimDTO> CreateAsync(CreateClaim command)
@@ -37,6 +42,7 @@ public class ClaimsService : IClaimsService
         };
 
         await _claimsRepository.CreateAsync(claim);
+        _auditer.AuditClaim(claim.Id, "POST");
 
         return new ClaimDTO(claim.Created, claim.Type, claim.DamageCost)
         {
@@ -46,8 +52,11 @@ public class ClaimsService : IClaimsService
         };
     }
 
-    public async Task DeleteAsync(DeleteClaim command) =>
+    public async Task DeleteAsync(DeleteClaim command)
+    {
         await _claimsRepository.DeleteAsync(command.Id);
+        _auditer.AuditClaim(command.Id, "DELETE");
+    }
 
     public async Task<IEnumerable<ClaimDTO>> GetAllAsync(GetClaims query) =>
         (await _claimsRepository.GetAllAsync(query.Offset, query.Limit))

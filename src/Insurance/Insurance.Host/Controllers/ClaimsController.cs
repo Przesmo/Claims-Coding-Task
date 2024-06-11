@@ -13,17 +13,15 @@ namespace Insurance.Host.Controllers;
 public class ClaimsController : ControllerBase
 {
     private readonly IClaimsService _claimsService;
-    private readonly Auditer _auditer;
+    
     private readonly ILogger<ClaimsController> _logger;
 
     public ClaimsController(
         IClaimsService claimsService,
-        AuditContext auditContext,
         ILogger<ClaimsController> logger
         )
     {
         _claimsService = claimsService;
-        _auditer = new Auditer(auditContext);
         _logger = logger;
     }
 
@@ -38,8 +36,6 @@ public class ClaimsController : ControllerBase
         try
         {
             var claim = await _claimsService.CreateAsync(command);
-            //ToDo: Move Audit to Application layer
-            _auditer.AuditClaim(claim.Id, "POST");
             return Ok(claim);
         }
         //ToDo: Move it error handler
@@ -54,7 +50,6 @@ public class ClaimsController : ControllerBase
     public async Task DeleteAsync([FromRoute] DeleteClaim command)
     {
         await _claimsService.DeleteAsync(command);
-        _auditer.AuditClaim(command.Id, "DELETE");
     }
 
     [HttpGet("{id}")]
