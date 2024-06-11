@@ -15,19 +15,13 @@ namespace Insurance.Host.Controllers;
 public class CoversController : ControllerBase
 {
     private readonly ICoversService _coversService;
-    private readonly ICoversRepository _coversRepository;
-    private readonly Auditer _auditer;
     private readonly ILogger<CoversController> _logger;
 
     public CoversController(
         ICoversService coversService,
-        ICoversRepository coversRepository,
-        AuditContext auditContext,
         ILogger<CoversController> logger)
     {
         _coversService = coversService;
-        _coversRepository = coversRepository;
-        _auditer = new Auditer(auditContext);
         _logger = logger;
     }
 
@@ -50,7 +44,6 @@ public class CoversController : ControllerBase
     public async Task<ActionResult> CreateAsync([FromBody] CreateCover command)
     {
         var cover = await _coversService.CreateAsync(command);
-        _auditer.AuditCover(cover.Id, "POST");
         return Ok(cover);
     }
 
@@ -58,6 +51,5 @@ public class CoversController : ControllerBase
     public async Task DeleteAsync([FromRoute] DeleteCover command)
     {
         await _coversService.DeleteAsync(command);
-        _auditer.AuditClaim(command.Id, "DELETE");
     }
 }
