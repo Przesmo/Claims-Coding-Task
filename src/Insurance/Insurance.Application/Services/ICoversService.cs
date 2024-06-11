@@ -1,4 +1,5 @@
 ﻿using Insurance.Application.DTOs;
+using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
 
 namespace Insurance.Application.Services;
@@ -10,4 +11,5 @@ public interface ICoversService
     decimal ComputePremium(ComputePremium query);
     Task<IEnumerable<CoverDTO>> GetAllAsync(GetCovers query);
     Task<CoverDTO> GetAsync(GetCover query);
+    Task<CoverDTO> CreateAsync(CreateCover command);
 }

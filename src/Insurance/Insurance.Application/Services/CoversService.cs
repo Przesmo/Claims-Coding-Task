@@ -1,4 +1,5 @@
 ﻿using Insurance.Application.DTOs;
+using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
 using Insurance.Infrastructure.Repositories.Covers;
 
@@ -46,6 +47,26 @@ public class CoversService : ICoversService
         }
 
         return totalPremium;
+    }
+
+    public async Task<CoverDTO> CreateAsync(CreateCover command)
+    {
+        var computePremiumQuery = new ComputePremium
+        {
+            CoverType = command.Type,
+            StartDate = command.StartDate,
+            EndDate = command.EndDate
+        };
+        var cover = new Cover
+        {
+            Id = Guid.NewGuid().ToString(),
+            Premium = ComputePremium(computePremiumQuery),
+            EndDate = command.EndDate,
+            StartDate = command.StartDate,
+            Type = command.Type
+        };
+        await _coversRepository.CreateAsync(cover);
+        return new CoverDTO(cover.Id, cover.StartDate, cover.EndDate, cover.Type, cover.Premium);
     }
 
     public async Task<IEnumerable<CoverDTO>> GetAllAsync(GetCovers query) =>
