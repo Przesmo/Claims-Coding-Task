@@ -7,6 +7,7 @@ public static class ApplicationRegistration
 {
     public static IServiceCollection RegisterApplication(this IServiceCollection services)
     {
-        return services.AddTransient<IClaimsService, ClaimsService>();
+        return services.AddTransient<IClaimsService, ClaimsService>()
+            .AddTransient<ICoversService, CoversService>();
     }
 }
