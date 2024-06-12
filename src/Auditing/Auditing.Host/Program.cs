@@ -7,7 +7,7 @@ var builder = Host.CreateApplicationBuilder(args);
 //ToDo: move to appsettings
 var connectionString = "host=localhost;username=admin;password=admin";
 builder.Services
-    .AddScoped<IAuditLogRepository, AuditLogRepository>()
+    .RegisterAuditLogsRepository(builder.Configuration)
     .RegisterEasyNetQ(connectionString)
     .AddSingleton<IAddAuditLogHandler, AddAuditLogHandler>()
     .AddSingleton<IConsumer, Consumer>()
