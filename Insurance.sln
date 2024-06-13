@@ -20,17 +20,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auditing", "Auditing", "{9E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auditing.Host", "src\Auditing\Auditing.Host\Auditing.Host.csproj", "{3D9AC29B-0027-48DA-8D73-0EBA362A4892}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auditing.Infrastructure", "src\Auditing\Auditing.Infrastructure\Auditing.Infrastructure.csproj", "{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Tests", "tests\Insurance.Tests\Insurance.Tests.csproj", "{C44B350F-8670-4BF0-8D87-83D3E6515A7E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Host", "src\Insurance\Insurance.Host\Insurance.Host.csproj", "{87300115-072D-4C87-8FF5-69BC84E66227}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Infrastructure", "src\Insurance\Insurance.Infrastructure\Insurance.Infrastructure.csproj", "{B443D21D-81AC-460D-9358-FDF747563A36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Application", "src\Insurance\Insurance.Application\Insurance.Application.csproj", "{A4F99873-DD75-4742-8416-66B1F04341DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Application", "src\Insurance\Insurance.Application\Insurance.Application.csproj", "{A4F99873-DD75-4742-8416-66B1F04341DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insurance.Application.Tests", "tests\Insurance.Application.Tests\Insurance.Application.Tests.csproj", "{EF66A3B5-D662-4124-93C0-34009EF8E1B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Application.Tests", "tests\Insurance.Application.Tests\Insurance.Application.Tests.csproj", "{EF66A3B5-D662-4124-93C0-34009EF8E1B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +40,6 @@ Global
 		{3D9AC29B-0027-48DA-8D73-0EBA362A4892}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D9AC29B-0027-48DA-8D73-0EBA362A4892}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D9AC29B-0027-48DA-8D73-0EBA362A4892}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C44B350F-8670-4BF0-8D87-83D3E6515A7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C44B350F-8670-4BF0-8D87-83D3E6515A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C44B350F-8670-4BF0-8D87-83D3E6515A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -74,7 +68,6 @@ Global
 		{97B7B010-B851-49A2-9AB7-2B1C6066F69C} = {74BF3347-3F7D-4528-AFAA-BFB33F426B31}
 		{9E647657-43B2-4CEA-83C0-451F63EFB0AE} = {74BF3347-3F7D-4528-AFAA-BFB33F426B31}
 		{3D9AC29B-0027-48DA-8D73-0EBA362A4892} = {9E647657-43B2-4CEA-83C0-451F63EFB0AE}
-		{7EA01992-FCDD-4BF1-AAE0-5D23B5CF4AE7} = {9E647657-43B2-4CEA-83C0-451F63EFB0AE}
 		{C44B350F-8670-4BF0-8D87-83D3E6515A7E} = {449D6CF2-6FD7-48B8-B329-88831383EE2C}
 		{87300115-072D-4C87-8FF5-69BC84E66227} = {97B7B010-B851-49A2-9AB7-2B1C6066F69C}
 		{B443D21D-81AC-460D-9358-FDF747563A36} = {97B7B010-B851-49A2-9AB7-2B1C6066F69C}

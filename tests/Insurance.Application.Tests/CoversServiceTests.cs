@@ -1,5 +1,4 @@
-﻿using Auditing.Infrastructure;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Insurance.Application.Services;
 using Insurance.Infrastructure.Repositories.Covers;
 using Moq;
@@ -11,11 +10,11 @@ public class CoversServiceTests
 {
     private readonly ICoversService _coversService;
     private readonly Mock<ICoversRepository> _coversRepositoryMock = new();
-    private readonly Mock<IAuditer> _auditerMock = new();
+   // private readonly Mock<IAuditer> _auditerMock = new();
 
     public CoversServiceTests()
     {
-        _coversService = new CoversService(_coversRepositoryMock.Object, _auditerMock.Object);
+        _coversService = new CoversService(_coversRepositoryMock.Object);
     }
 
     [Fact]

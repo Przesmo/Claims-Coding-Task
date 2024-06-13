@@ -1,9 +1,7 @@
-using Auditing.Infrastructure;
 using Insurance.Application.DTOs;
 using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
 using Insurance.Application.Services;
-using Insurance.Infrastructure.Repositories.Covers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Insurance.Host.Controllers;

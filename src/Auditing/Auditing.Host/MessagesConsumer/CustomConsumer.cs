@@ -6,14 +6,14 @@ using EasyNetQ.Topology;
 
 namespace Auditing.Host.MessagesConsumer;
 
-internal class Consumer : IConsumer
+internal class CustomConsumer : IConsumer
 {
     private readonly IBus _bus;
     private readonly IAddAuditLogHandler _messageHandler;
     private IDisposable? _queueConsumer;
     public Guid Id { get; } = Guid.NewGuid();
 
-    public Consumer(IBus bus, IAddAuditLogHandler messageHandler)
+    public CustomConsumer(IBus bus, IAddAuditLogHandler messageHandler)
     {
         _bus = bus;
         _messageHandler = messageHandler;

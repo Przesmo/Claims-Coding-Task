@@ -18,7 +18,7 @@ namespace Auditing.Host.MessagesHandler
                 new AuditLog
                 {
                     EntityId = messageBody.EntityId,
-                    EntityMetadata = messageBody.EntityMetadata,
+                    EntityChange = messageBody.EntityChange,
                     EntityType = messageBody.EntityType,
                     TimeStamp = messageBody.TimeStamp
                 }, cancellationToken);

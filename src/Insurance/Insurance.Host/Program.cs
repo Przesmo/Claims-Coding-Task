@@ -1,7 +1,5 @@
-using Auditing.Infrastructure;
 using Insurance.Application;
 using Insurance.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +13,6 @@ builder.Services
     {
         x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
-
-builder.Services.AddDbContext<AuditContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -38,12 +33,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//ToDo: Move it to its own project
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<AuditContext>();
-    context.Database.Migrate();
-}
+
 
 app.Run();
 

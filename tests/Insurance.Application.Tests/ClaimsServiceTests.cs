@@ -1,5 +1,4 @@
-﻿using Auditing.Infrastructure;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Insurance.Application.Exceptions;
 using Insurance.Application.Messages.Commands;
 using Insurance.Application.Services;
@@ -14,12 +13,12 @@ public class ClaimsServiceTests
     private readonly IClaimsService _claimsService;
     private readonly Mock<IClaimsRepository> _claimsRepositoryMock = new();
     private readonly Mock<ICoversService> _coversServiceMock = new();
-    private readonly Mock<IAuditer> _auditerMock = new();
+    //private readonly Mock<IAuditer> _auditerMock = new();
 
     public ClaimsServiceTests()
     {
         _claimsService = new ClaimsService(
-            _claimsRepositoryMock.Object, _coversServiceMock.Object, _auditerMock.Object);
+            _claimsRepositoryMock.Object, _coversServiceMock.Object);
     }
 
     [Fact]
@@ -72,7 +71,7 @@ public class ClaimsServiceTests
         var result = await _claimsService.CreateAsync(command);
 
         // Assert
-        _auditerMock.Verify(x => x.AuditClaim(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        //_auditerMock.Verify(x => x.AuditClaim(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
     }
 
     [Fact]
