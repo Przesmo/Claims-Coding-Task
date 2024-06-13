@@ -6,7 +6,7 @@ using EasyNetQ.Consumer;
 
 var builder = Host.CreateApplicationBuilder(args);
 //ToDo: move to appsettings
-var connectionString = "host=localhost;username=admin;password=admin";
+var connectionString = "host=localhost;username=guest;password=guest";
 builder.Services
     .RegisterAuditLogsRepository(builder.Configuration)
     .RegisterEasyNetQ(connectionString)
