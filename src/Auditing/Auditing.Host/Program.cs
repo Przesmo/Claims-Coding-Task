@@ -18,10 +18,12 @@ builder.Services
 
 var host = builder.Build();
 
-using (var scope = host.Services.CreateScope())
+/*using (var scope = host.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AuditContext>();
     context.Database.Migrate();
-}
+}*/
 
 host.Run();
+
+public partial class Program { }

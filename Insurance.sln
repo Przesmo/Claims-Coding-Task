@@ -32,6 +32,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Application.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auditing.Messeging.Tests", "tests\Auditing.Messeging.Tests\Auditing.Messeging.Tests.csproj", "{DB29A5B5-F17B-46CC-A40A-95C7A6F9FB92}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auditing.ComponentTests", "tests\Auditing.ComponentTests\Auditing.ComponentTests.csproj", "{C48BB6F2-4ABD-44A0-9AA7-637547798FE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{DB29A5B5-F17B-46CC-A40A-95C7A6F9FB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB29A5B5-F17B-46CC-A40A-95C7A6F9FB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB29A5B5-F17B-46CC-A40A-95C7A6F9FB92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C48BB6F2-4ABD-44A0-9AA7-637547798FE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C48BB6F2-4ABD-44A0-9AA7-637547798FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C48BB6F2-4ABD-44A0-9AA7-637547798FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C48BB6F2-4ABD-44A0-9AA7-637547798FE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{A4F99873-DD75-4742-8416-66B1F04341DE} = {97B7B010-B851-49A2-9AB7-2B1C6066F69C}
 		{EF66A3B5-D662-4124-93C0-34009EF8E1B1} = {449D6CF2-6FD7-48B8-B329-88831383EE2C}
 		{DB29A5B5-F17B-46CC-A40A-95C7A6F9FB92} = {449D6CF2-6FD7-48B8-B329-88831383EE2C}
+		{C48BB6F2-4ABD-44A0-9AA7-637547798FE0} = {449D6CF2-6FD7-48B8-B329-88831383EE2C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D4C1340-FBC4-4F35-944F-26237883E032}

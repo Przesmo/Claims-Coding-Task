@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services
-    .RegisterRepositories(builder.Configuration.GetConnectionString("MongoDb"), builder.Configuration["MongoDb:DatabaseName"])
+    .RegisterRepositories(builder.Configuration.GetConnectionString("MongoDb")!, builder.Configuration["MongoDb:DatabaseName"]!)
     .RegisterApplication()
     .AddControllers()
     .AddJsonOptions(x =>
