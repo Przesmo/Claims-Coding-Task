@@ -18,11 +18,14 @@ builder.Services
 
 var host = builder.Build();
 
-/*using (var scope = host.Services.CreateScope())
+if (builder.Environment.EnvironmentName != "test")
 {
-    var context = scope.ServiceProvider.GetRequiredService<AuditContext>();
-    context.Database.Migrate();
-}*/
+    using (var scope = host.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<AuditContext>();
+        context.Database.Migrate();
+    }
+}
 
 host.Run();
 
