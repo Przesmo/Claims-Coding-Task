@@ -7,11 +7,10 @@ using EasyNetQ.Consumer;
 using Microsoft.EntityFrameworkCore;
 
 var builder = Host.CreateApplicationBuilder(args);
-//ToDo: move to appsettings
-var connectionString = "host=localhost;username=guest;password=guest";
+
 builder.Services
     .RegisterAuditLogsRepository(builder.Configuration)
-    .RegisterEasyNetQ(connectionString)
+    .RegisterEasyNetQ(builder.Configuration.GetSection("Bus:ConnectionString").Value)
     .AddSingleton<IAddAuditLogHandler, AddAuditLogHandler>()
     .AddSingleton<IConsumer, CustomConsumer>()
     .AddHostedService<ConsumerSubscriptionService>();
