@@ -36,6 +36,7 @@ internal class CustomConsumer : IConsumer
 
     private Queue DeclareQueue()
     {
+        //For the simplicity left Custom Error Strategy and not creating any dedicated Dead Letter Queue
         var exchange = _bus.Advanced.ExchangeDeclare(typeof(AddAuditLog).ToString(), "direct");
         var queueName = "AuditingQueue";
         var queue = _bus.Advanced.QueueDeclare(queueName,
