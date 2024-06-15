@@ -2,7 +2,9 @@ using Auditing.Host;
 using Auditing.Host.MessagesConsumer;
 using Auditing.Host.MessagesHandler;
 using Auditing.Host.Repositories;
+using Auditing.Infrastructure;
 using EasyNetQ.Consumer;
+using Microsoft.EntityFrameworkCore;
 
 var builder = Host.CreateApplicationBuilder(args);
 //ToDo: move to appsettings
@@ -14,12 +16,12 @@ builder.Services
     .AddSingleton<IConsumer, CustomConsumer>()
     .AddHostedService<ConsumerSubscriptionService>();
 
-//ToDo: Chceck if it is needed and why
-/*using (var scope = app.Services.CreateScope())
+var host = builder.Build();
+
+using (var scope = host.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AuditContext>();
     context.Database.Migrate();
-}*/
+}
 
-var host = builder.Build();
 host.Run();
