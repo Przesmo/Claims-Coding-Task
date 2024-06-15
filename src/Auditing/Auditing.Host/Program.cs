@@ -12,6 +12,7 @@ builder.Services
     .RegisterAuditLogsRepository(builder.Configuration)
     .RegisterEasyNetQ(builder.Configuration.GetSection("Bus:ConnectionString").Value)
     .AddSingleton<IAddAuditLogHandler, AddAuditLogHandler>()
+    .Decorate<IAddAuditLogHandler, LoggingHandler>()
     .AddSingleton<IConsumer, CustomConsumer>()
     .AddHostedService<ConsumerSubscriptionService>();
 
