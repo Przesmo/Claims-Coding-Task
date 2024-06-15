@@ -17,8 +17,8 @@ public class MessagingTests
         var bus = services.BuildServiceProvider().GetRequiredService<IBus>();
         var advancesBus = bus.Advanced;
 
-        var exchange = advancesBus.ExchangeDeclare(typeof(AddAuditLog).ToString(), "topic");
-        var key = "RandomKey";
+        var exchange = advancesBus.ExchangeDeclare(typeof(AddAuditLog).ToString(), "direct");
+        var key = "auditing";
         var message = new Message<AddAuditLog>(new AddAuditLog
         {
             EntityId = "123",

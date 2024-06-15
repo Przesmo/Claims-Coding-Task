@@ -28,12 +28,11 @@ internal class CustomConsumer : IConsumer
 
     private Queue DeclareQueue()
     {
-        //ToDo: replace with normal values, check type
-        var exchange = _bus.Advanced.ExchangeDeclare(typeof(AddAuditLog).ToString(), "topic");
-        var queueName = "TestQueue";
+        var exchange = _bus.Advanced.ExchangeDeclare(typeof(AddAuditLog).ToString(), "direct");
+        var queueName = "AuditingQueue";
         var queue = _bus.Advanced.QueueDeclare(queueName,
             options => options.AsDurable(true).AsAutoDelete(true).WithSingleActiveConsumer(true));
-        _bus.Advanced.Bind(exchange, queue, "RandomKey");
+        _bus.Advanced.Bind(exchange, queue, "auditing");
         return queue;
     }
 
