@@ -35,8 +35,8 @@ public class AuditingTests
         AuditLog? auditLog = null;
         for (var i = 0; i < 5 && auditLog is null; i++)
         {
-            auditLog = _repositoryTestDouble.Get();
             await Task.Delay(1000);
+            auditLog = _repositoryTestDouble.Get();
         }
 
         auditLog.Should().NotBeNull();
