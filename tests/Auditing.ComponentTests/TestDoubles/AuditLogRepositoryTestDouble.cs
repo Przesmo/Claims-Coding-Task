@@ -1,16 +1,16 @@
 ﻿using Auditing.Host.Repositories;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace Auditing.ComponentTests.Configuration;
+namespace Auditing.ComponentTests.TestDoubles;
 
-public class RepositoryTestDouble : IAuditLogRepository
+public class AuditLogRepositoryTestDouble : IAuditLogRepository
 {
     private readonly IMemoryCache _memoryCache;
     private readonly MemoryCacheEntryOptions _cacheEntryOptions = new MemoryCacheEntryOptions()
         .SetAbsoluteExpiration(TimeSpan.FromMinutes(1));
     private const string AuditKey = "AuditLog";
 
-    public RepositoryTestDouble(IMemoryCache memoryCache)
+    public AuditLogRepositoryTestDouble(IMemoryCache memoryCache)
     {
         _memoryCache = memoryCache;
     }
