@@ -1,4 +1,5 @@
-﻿using Auditing.Host.Repositories;
+﻿using Auditing.ComponentTests.TestDoubles;
+using Auditing.Host.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -16,12 +17,14 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
         {
             var serviceProvider = services.BuildServiceProvider();
             services.AddMemoryCache();
+            //MsSQL testcontainer is too slow to run at the moment
+            //Temporarily, replaced with test double
             var descriptor = new ServiceDescriptor(
                 typeof(IAuditLogRepository),
-                typeof(RepositoryTestDouble),
+                typeof(AuditLogRepositoryTestDouble),
                 ServiceLifetime.Singleton);
             services.Replace(descriptor);
-            services.AddSingleton<RepositoryTestDouble>();
+            services.AddSingleton<AuditLogRepositoryTestDouble>();
         });
         builder.UseEnvironment("test");
     }
