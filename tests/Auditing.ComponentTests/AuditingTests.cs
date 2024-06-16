@@ -1,4 +1,5 @@
 ﻿using Auditing.ComponentTests.Configuration;
+using Auditing.ComponentTests.TestDoubles;
 using Auditing.Host.Contracts;
 using Auditing.Host.Repositories;
 using FluentAssertions;
@@ -10,7 +11,7 @@ namespace Auditing.ComponentTests;
 public class AuditingTests
 {
     private readonly MessagesPublisher _messagesPublisher;
-    private readonly RepositoryTestDouble _repositoryTestDouble;
+    private readonly AuditLogRepositoryTestDouble _repositoryTestDouble;
 
     public AuditingTests(ComponentTestsFixture componentTestsFixture)
     {

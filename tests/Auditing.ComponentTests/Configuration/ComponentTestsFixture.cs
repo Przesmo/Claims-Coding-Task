@@ -1,4 +1,5 @@
-﻿using EasyNetQ;
+﻿using Auditing.ComponentTests.TestDoubles;
+using EasyNetQ;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
@@ -11,12 +12,12 @@ public class ComponentTestsFixture : IAsyncLifetime
     private readonly WebApplicationFactory<Program> _application = CustomWebApplicationFactory<Program>.Instance;
     private readonly DockerInfrastructureFixture _infrastructure = new();
 
-    public RepositoryTestDouble RepositoryTestDouble { get; private set; } = null!;
+    public AuditLogRepositoryTestDouble RepositoryTestDouble { get; private set; } = null!;
     public MessagesPublisher MessagesPublisher { get; private set; } = null!;
 
     public Task InitializeAsync()
     {
-        RepositoryTestDouble = _application.Services.GetRequiredService<RepositoryTestDouble>();
+        RepositoryTestDouble = _application.Services.GetRequiredService<AuditLogRepositoryTestDouble>();
         var bus = _application.Services.GetRequiredService<IBus>();
         MessagesPublisher = new MessagesPublisher(bus);
         return Task.CompletedTask;
