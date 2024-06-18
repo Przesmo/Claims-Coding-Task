@@ -20,7 +20,7 @@ public class AuditingTests
     }
 
     [Fact]
-    public async Task Test()
+    public async Task WhenPublishingNewMessage_ShouldSaveToDatabase()
     {
         // Act
         var message = new AddAuditLog

@@ -19,6 +19,7 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
             services.AddMemoryCache();
             //MsSQL testcontainer is too slow to run at the moment
             //Temporarily, replaced with test double
+            //It could be due to slow download of the image. Replace it with the docke container
             var descriptor = new ServiceDescriptor(
                 typeof(IAuditLogRepository),
                 typeof(AuditLogRepositoryTestDouble),

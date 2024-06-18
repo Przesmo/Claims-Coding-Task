@@ -5,8 +5,7 @@ using MongoDB.EntityFrameworkCore.Extensions;
 
 namespace Insurance.Infrastructure.Repositories.Database;
 
-//ToDo: double-check initializing
-internal class InsuranceContext : DbContext
+public class InsuranceContext : DbContext
 {
     public DbSet<Claim> Claims { get; init; }
     public DbSet<Cover> Covers { get; init; }
