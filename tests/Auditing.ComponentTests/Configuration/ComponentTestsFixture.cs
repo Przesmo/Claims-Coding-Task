@@ -2,7 +2,6 @@
 using EasyNetQ;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Xunit;
 
 namespace Auditing.ComponentTests.Configuration;
