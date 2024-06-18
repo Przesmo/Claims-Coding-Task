@@ -5,7 +5,7 @@ namespace Insurance.Infrastructure.Repositories.Covers;
 public class Cover
 {
     [BsonId]
-    public string Id { get; set; }
+    public string Id { get; set; } = null!;
 
     [BsonElement("startDate")]
     [BsonDateTimeOptions(DateOnly = true)]

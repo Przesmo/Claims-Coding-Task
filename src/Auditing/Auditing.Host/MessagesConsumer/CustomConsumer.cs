@@ -31,7 +31,7 @@ internal class CustomConsumer : IConsumer
 
     }
 
-    private Guid GetCorrelationId(MessageProperties messageProperties) =>
+    private static Guid GetCorrelationId(MessageProperties messageProperties) =>
         Guid.TryParse(messageProperties.CorrelationId, out var correlationId) ? correlationId : Guid.NewGuid();
 
     private Queue DeclareQueue()

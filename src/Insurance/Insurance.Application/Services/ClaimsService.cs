@@ -57,7 +57,6 @@ public class ClaimsService : IClaimsService
             .Select(x => new ClaimDTO(x.Id, x.CoverId, x.Name, x.Created, x.Type, x.DamageCost));
 
     //ToDo: Fix handling null
-    //ToDo: Improve Mapping
     public async Task<ClaimDTO> GetAsync(GetClaim query)
     {
         var claim = await _claimsRepository.GetAsync(query.Id);

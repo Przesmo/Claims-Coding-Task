@@ -27,6 +27,5 @@ public class MessagingTests
             TimeStamp = DateTime.UtcNow,
         });
         await advancesBus.PublishAsync(exchange, key, false, message);
- 
     }
 }

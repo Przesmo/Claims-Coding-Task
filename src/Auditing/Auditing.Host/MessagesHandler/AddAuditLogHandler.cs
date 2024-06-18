@@ -6,7 +6,7 @@ namespace Auditing.Host.MessagesHandler;
 
 public class AddAuditLogHandler : IAddAuditLogHandler
 {
-    private IAuditLogRepository _auditLogRepository;
+    private readonly IAuditLogRepository _auditLogRepository;
 
     public AddAuditLogHandler(IAuditLogRepository auditLogRepository)
     {

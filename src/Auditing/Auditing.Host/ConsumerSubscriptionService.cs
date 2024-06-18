@@ -1,5 +1,4 @@
-﻿
-using EasyNetQ.Consumer;
+﻿using EasyNetQ.Consumer;
 
 namespace Auditing.Host;
 

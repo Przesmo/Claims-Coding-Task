@@ -82,13 +82,13 @@ public class CoversService : ICoversService
     public async Task<IEnumerable<CoverDTO>> GetAllAsync(GetCovers query) =>
         (await _coversRepository.GetAllAsync(query.Offset, query.Limit))
             .Select(x => new CoverDTO(x.Id, x.StartDate, x.EndDate, x.Type, x.Premium));
+
     public async Task<CoverDTO> GetAsync(GetCover query)
     {
         var cover = await _coversRepository.GetAsync(query.Id);
         return new CoverDTO(cover.Id, cover.StartDate, cover.EndDate, cover.Type, cover.Premium);
     }
 
-    //ToDo add test
     public async Task<bool> IsDateCoveredAsync(string coverId, DateTime date)
     {
         var cover = await _coversRepository.GetAsync(coverId);

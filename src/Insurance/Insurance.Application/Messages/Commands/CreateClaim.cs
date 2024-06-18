@@ -6,13 +6,13 @@ namespace Insurance.Application.Messages.Commands;
 public class CreateClaim
 {
     [Required]
-    public string CoverId { get; set; } = null!;
+    public required string CoverId { get; set; }
 
     [Required]
     public DateTime Created { get; set; }
 
     [Required]
-    public string Name { get; set; } = null!;
+    public required string Name { get; set; }
 
     [Required]
     public ClaimType Type { get; set; }
