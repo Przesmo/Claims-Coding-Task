@@ -7,17 +7,11 @@ namespace Auditing.Messeging.Tests;
 
 public class MessagingTests
 {
-    [Fact]
+    [Fact(Skip = "Only for quick manual tests")]
     public async Task PostMessage()
     {
-        //ToDo: Refactor
-        var connectionString = "host=localhost;username=guest;password=guest";
-        var services = new ServiceCollection();
-        services.RegisterEasyNetQ(connectionString);
-        var bus = services.BuildServiceProvider().GetRequiredService<IBus>();
-        var advancesBus = bus.Advanced;
-
-        var exchange = advancesBus.ExchangeDeclare(typeof(AddAuditLog).ToString(), "direct");
+        var advancedBus = CreateAdvancedBus();
+        var exchange = advancedBus.ExchangeDeclare(typeof(AddAuditLog).ToString(), "direct");
         var key = "auditing";
         var message = new Message<AddAuditLog>(new AddAuditLog
         {
@@ -26,6 +20,16 @@ public class MessagingTests
             EntityType = "wer",
             TimeStamp = DateTime.UtcNow,
         });
-        await advancesBus.PublishAsync(exchange, key, false, message);
+
+        await advancedBus.PublishAsync(exchange, key, false, message);
+    }
+
+    private IAdvancedBus CreateAdvancedBus()
+    {
+        var connectionString = "host=localhost;username=guest;password=guest";
+        var services = new ServiceCollection();
+        services.RegisterEasyNetQ(connectionString);
+        var bus = services.BuildServiceProvider().GetRequiredService<IBus>();
+        return bus.Advanced;
     }
 }
