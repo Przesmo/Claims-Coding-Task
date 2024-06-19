@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Insurance.Application.DTOs;
 using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
@@ -7,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Insurance.Host.Controllers;
 
 [ApiController]
-//ToDo: Add versioning
-[Route("[controller]")]
+[ApiVersion("1.0")]
+[Route("v{version:apiVersion}/[controller]")]
 //ToDo: Add simple architecture tests
 public class CoversController : ControllerBase
 {

@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Insurance.Application.DTOs;
 using Insurance.Application.Exceptions;
 using Insurance.Application.Messages.Commands;
@@ -8,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Insurance.Host.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[ApiVersion("1.0")]
+[Route("v{version:apiVersion}/[controller]")]
 public class ClaimsController : ControllerBase
 {
     private readonly IClaimsService _claimsService;
