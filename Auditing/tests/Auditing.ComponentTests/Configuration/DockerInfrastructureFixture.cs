@@ -1,4 +1,5 @@
-﻿using Testcontainers.RabbitMq;
+﻿using Auditing.ComponentTests.Configuration.Options;
+using Testcontainers.RabbitMq;
 
 namespace Auditing.ComponentTests.Configuration;
 
@@ -8,14 +9,15 @@ internal class DockerInfrastructureFixture : IAsyncDisposable
 
     public DockerInfrastructureFixture()
     {
-        //ToDo: read data from settings
+        var infrastructureOptions = new InfrastructureOptions();
+        var rabbitMQOptions = infrastructureOptions.RabbitMQOptions;
         _rabbitMqContainer = new RabbitMqBuilder()
             .WithImage("rabbitmq:3-management")
-            .WithHostname("localhost")
+            .WithHostname(rabbitMQOptions.Host)
             .WithPortBinding(15672, 15672)
             .WithPortBinding(5672, 5672)
-            .WithUsername("guest")
-            .WithPassword("guest")
+            .WithUsername(rabbitMQOptions.Username)
+            .WithPassword(rabbitMQOptions.Password)
             .Build();
         _rabbitMqContainer.StartAsync().Wait();
     }
