@@ -32,19 +32,19 @@ public class ClaimsController : ControllerBase
 
     [HttpPost]
     //To Do: Standarize when Action result when Task are returned etc.
-    public async Task<ActionResult> CreateAsync([FromBody] CreateClaim command)
+    public async Task<ClaimDTO> CreateAsync([FromBody] CreateClaim command)
     {
-        try
+        return await _claimsService.CreateAsync(command);
+        //It will be moved to handler
+        /*try
         {
-            var claim = await _claimsService.CreateAsync(command);
-            return Ok(claim);
         }
         //ToDo: Move it error handler
         catch (ClaimNotCoveredException ex)
         {
             _logger.LogError(ex, $"Claim cannot be created for cover: {command.CoverId}");
-            return BadRequest("Claim created date is not covered");
-        }
+           // return BadRequest("Claim created date is not covered");
+        }*/
     }
 
     [HttpDelete("{id}")]

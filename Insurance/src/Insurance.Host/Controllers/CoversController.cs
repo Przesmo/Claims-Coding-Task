@@ -14,14 +14,10 @@ namespace Insurance.Host.Controllers;
 public class CoversController : ControllerBase
 {
     private readonly ICoversService _coversService;
-    private readonly ILogger<CoversController> _logger;
 
-    public CoversController(
-        ICoversService coversService,
-        ILogger<CoversController> logger)
+    public CoversController(ICoversService coversService)
     {
         _coversService = coversService;
-        _logger = logger;
     }
 
     [HttpGet("premium/compute")]
@@ -40,10 +36,10 @@ public class CoversController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> CreateAsync([FromBody] CreateCover command)
+    public async Task<CoverDTO> CreateAsync([FromBody] CreateCover command)
     {
         var cover = await _coversService.CreateAsync(command);
-        return Ok(cover);
+        return cover;
     }
 
     [HttpDelete("{id}")]
