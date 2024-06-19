@@ -56,10 +56,10 @@ public class ClaimsService : IClaimsService
         (await _claimsRepository.GetAllAsync(query.Offset, query.Limit))
             .Select(x => new ClaimDTO(x.Id, x.CoverId, x.Name, x.Created, x.Type, x.DamageCost));
 
-    //ToDo: Fix handling null
-    public async Task<ClaimDTO> GetAsync(GetClaim query)
+    public async Task<ClaimDTO?> GetAsync(GetClaim query)
     {
         var claim = await _claimsRepository.GetAsync(query.Id);
-        return new ClaimDTO(claim.Id, claim.CoverId, claim.Name, claim.Created, claim.Type, claim.DamageCost);
+        return claim is null ? null :
+            new ClaimDTO(claim.Id, claim.CoverId, claim.Name, claim.Created, claim.Type, claim.DamageCost);
     }
 }

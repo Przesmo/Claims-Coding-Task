@@ -54,8 +54,7 @@ public class ClaimsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    //To Do: check if it will return 404 when resource is not found
-    public async Task<ClaimDTO> GetAsync([FromRoute] GetClaim query)
+    public async Task<ClaimDTO?> GetAsync([FromRoute] GetClaim query)
     {
         return await _claimsService.GetAsync(query);
     }

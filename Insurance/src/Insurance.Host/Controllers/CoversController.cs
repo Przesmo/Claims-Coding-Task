@@ -29,8 +29,7 @@ public class CoversController : ControllerBase
         await _coversService.GetAllAsync(query);
 
     [HttpGet("{id}")]
-    //To Do: check if it will return 404 when resource is not found
-    public async Task<CoverDTO> GetAsync([FromRoute] GetCover query)
+    public async Task<CoverDTO?> GetAsync([FromRoute] GetCover query)
     {
         return await _coversService.GetAsync(query);
     }
