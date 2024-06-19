@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Insurance\Insurance.Host\Insurance.Host.csproj" />
+    <ProjectReference Include="..\..\src\Insurance.Host\Insurance.Host.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Auditing\Auditing.Host\Auditing.Host.csproj" />
+    <ProjectReference Include="..\..\src\Auditing.Host\Auditing.Host.csproj" />
   </ItemGroup>
 
 </Project>
