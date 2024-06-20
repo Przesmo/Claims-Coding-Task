@@ -10,7 +10,6 @@ namespace Insurance.Host.Controllers;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("v{version:apiVersion}/[controller]")]
-//ToDo: Add simple architecture tests
 public class CoversController : ControllerBase
 {
     private readonly ICoversService _coversService;
@@ -29,21 +28,14 @@ public class CoversController : ControllerBase
         await _coversService.GetAllAsync(query);
 
     [HttpGet("{id}")]
-    public async Task<CoverDTO?> GetAsync([FromRoute] GetCover query)
-    {
-        return await _coversService.GetAsync(query);
-    }
+    public async Task<CoverDTO?> GetAsync([FromRoute] GetCover query) =>
+        await _coversService.GetAsync(query);
 
     [HttpPost]
-    public async Task<CoverDTO> CreateAsync([FromBody] CreateCover command)
-    {
-        var cover = await _coversService.CreateAsync(command);
-        return cover;
-    }
+    public async Task<CoverDTO> CreateAsync([FromBody] CreateCover command) =>
+        await _coversService.CreateAsync(command);
 
     [HttpDelete("{id}")]
-    public async Task DeleteAsync([FromRoute] DeleteCover command)
-    {
+    public async Task DeleteAsync([FromRoute] DeleteCover command) =>
         await _coversService.DeleteAsync(command);
-    }
 }
