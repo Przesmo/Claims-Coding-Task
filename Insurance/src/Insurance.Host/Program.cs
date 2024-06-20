@@ -1,4 +1,5 @@
 using Insurance.Application;
+using Insurance.Host.ExceptionHandlers;
 using Insurance.Host.Swagger;
 using Insurance.Infrastructure.Repositories;
 using Microsoft.Extensions.Options;
@@ -28,13 +29,18 @@ builder.Services
         options.SubstituteApiVersionInUrl = true;
     });
 
-builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services
+    .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
+    .AddEndpointsApiExplorer()
+    .AddSwaggerGen()
+    .AddExceptionHandler<GlobalExceptionHandler>()
+    .AddExceptionHandler<ClaimNotCoveredExceptionHandler>()
+    .AddProblemDetails();
 
 var app = builder.Build();
 
-app.UseSwagger()
+app.UseExceptionHandler()
+   .UseSwagger()
    .UseSwaggerUI(options =>
    {
        var descriptions = app.DescribeApiVersions();
