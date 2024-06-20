@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Insurance.Application.Exceptions;
 using Insurance.Application.Messages.Commands;
+using Insurance.Application.Messages.Queries;
 using Insurance.Application.Services;
 using Insurance.Infrastructure.Repositories.Claims;
 using Moq;
@@ -33,7 +34,8 @@ public class ClaimsServiceTests
             Name = "Name",
             Type = ClaimType.Fire
         };
-        _coversServiceMock.Setup(x => x.IsDateCoveredAsync(command.CoverId, command.Created))
+        var isCoveredQuery = new IsDateCovered { CoverId = command.CoverId, DateToCover = command.Created };
+        _coversServiceMock.Setup(x => x.IsDateCoveredAsync(isCoveredQuery))
             .ReturnsAsync(true);
         _claimsRepositoryMock.Setup(x => x.CreateAsync(It.IsAny<Claim>()))
             .Returns(Task.CompletedTask);
@@ -62,7 +64,8 @@ public class ClaimsServiceTests
             Name = "Name",
             Type = ClaimType.Fire
         };
-        _coversServiceMock.Setup(x => x.IsDateCoveredAsync(command.CoverId, command.Created))
+        var isCoveredQuery = new IsDateCovered { CoverId = command.CoverId, DateToCover = command.Created };
+        _coversServiceMock.Setup(x => x.IsDateCoveredAsync(isCoveredQuery))
             .ReturnsAsync(true);
         _claimsRepositoryMock.Setup(x => x.CreateAsync(It.IsAny<Claim>()))
             .Returns(Task.CompletedTask);
@@ -86,7 +89,8 @@ public class ClaimsServiceTests
             Name = "Name",
             Type = ClaimType.Fire
         };
-        _coversServiceMock.Setup(x => x.IsDateCoveredAsync(command.CoverId, command.Created))
+        var isCoveredQuery = new IsDateCovered { CoverId = command.CoverId, DateToCover = command.Created };
+        _coversServiceMock.Setup(x => x.IsDateCoveredAsync(isCoveredQuery))
             .ReturnsAsync(false);
 
         // Act & Assert

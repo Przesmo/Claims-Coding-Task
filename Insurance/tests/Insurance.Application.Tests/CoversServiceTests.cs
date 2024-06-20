@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Insurance.Application.Messages.Queries;
 using Insurance.Application.Services;
 using Insurance.Infrastructure.Repositories.Covers;
 using Moq;
@@ -10,7 +11,7 @@ public class CoversServiceTests
 {
     private readonly ICoversService _coversService;
     private readonly Mock<ICoversRepository> _coversRepositoryMock = new();
-   // private readonly Mock<IAuditer> _auditerMock = new();
+    // private readonly Mock<IAuditer> _auditerMock = new();
 
     public CoversServiceTests()
     {
@@ -29,9 +30,9 @@ public class CoversServiceTests
         };
         _coversRepositoryMock.Setup(x => x.GetAsync(cover.Id))
             .ReturnsAsync(cover);
-
+        var query = new IsDateCovered { CoverId = cover.Id, DateToCover = DateTime.UtcNow.AddDays(-5) };
         // Act
-        var result = await _coversService.IsDateCoveredAsync(cover.Id, DateTime.UtcNow.AddDays(-5));
+        var result = await _coversService.IsDateCoveredAsync(query);
 
         // Assert
         result.Should().BeTrue();
@@ -44,9 +45,10 @@ public class CoversServiceTests
         var coverId = "10";
         _coversRepositoryMock.Setup(x => x.GetAsync(coverId))
             .ReturnsAsync((Cover?)null);
+        var query = new IsDateCovered { CoverId = coverId, DateToCover = DateTime.UtcNow.AddDays(-5) };
 
         // Act
-        var result = await _coversService.IsDateCoveredAsync(coverId, DateTime.UtcNow.AddDays(-5));
+        var result = await _coversService.IsDateCoveredAsync(query);
 
         // Assert
         result.Should().BeFalse();
@@ -64,9 +66,10 @@ public class CoversServiceTests
         };
         _coversRepositoryMock.Setup(x => x.GetAsync(cover.Id))
             .ReturnsAsync(cover);
+        var query = new IsDateCovered { CoverId = cover.Id, DateToCover = DateTime.UtcNow.AddDays(-5) };
 
         // Act
-        var result = await _coversService.IsDateCoveredAsync(cover.Id, DateTime.UtcNow.AddDays(-5));
+        var result = await _coversService.IsDateCoveredAsync(query);
 
         // Assert
         result.Should().BeFalse();

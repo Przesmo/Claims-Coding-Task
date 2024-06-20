@@ -6,8 +6,7 @@ namespace Insurance.Application.Services;
 
 public interface ICoversService
 {
-    //ToDo: change it to query for consistency
-    Task<bool> IsDateCoveredAsync(string coverId, DateTime date);
+    Task<bool> IsDateCoveredAsync(IsDateCovered query);
     decimal ComputePremium(ComputePremium query);
     Task<IEnumerable<CoverDTO>> GetAllAsync(GetCovers query);
     Task<CoverDTO?> GetAsync(GetCover query);

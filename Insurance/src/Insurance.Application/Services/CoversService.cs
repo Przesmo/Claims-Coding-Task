@@ -90,17 +90,15 @@ public class CoversService : ICoversService
             new CoverDTO(cover.Id, cover.StartDate, cover.EndDate, cover.Type, cover.Premium);
     }
 
-    public async Task<bool> IsDateCoveredAsync(string coverId, DateTime date)
+    public async Task<bool> IsDateCoveredAsync(IsDateCovered query)
     {
-        var cover = await _coversRepository.GetAsync(coverId);
+        var cover = await _coversRepository.GetAsync(query.CoverId);
 
         if (cover == null)
         {
-            //ToDo think about it what to do 
-            // Maybe it is business decision
             return false;
         }
 
-        return cover.StartDate <= date && cover.EndDate >= date;
+        return cover.StartDate <= query.DateToCover && cover.EndDate >= query.DateToCover;
     }
 }
