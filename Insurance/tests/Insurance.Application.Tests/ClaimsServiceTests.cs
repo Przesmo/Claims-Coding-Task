@@ -3,6 +3,7 @@ using Insurance.Application.Exceptions;
 using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
 using Insurance.Application.Services;
+using Insurance.Infrastructure.AuditingIntegration;
 using Insurance.Infrastructure.Repositories.Claims;
 using Moq;
 using Xunit;
@@ -14,12 +15,12 @@ public class ClaimsServiceTests
     private readonly IClaimsService _claimsService;
     private readonly Mock<IClaimsRepository> _claimsRepositoryMock = new();
     private readonly Mock<ICoversService> _coversServiceMock = new();
-    //private readonly Mock<IAuditer> _auditerMock = new();
+    private readonly Mock<IAuditingQueue> _auditingQueueMock = new();
 
     public ClaimsServiceTests()
     {
         _claimsService = new ClaimsService(
-            _claimsRepositoryMock.Object, _coversServiceMock.Object);
+            _claimsRepositoryMock.Object, _coversServiceMock.Object, _auditingQueueMock.Object);
     }
 
     [Fact]

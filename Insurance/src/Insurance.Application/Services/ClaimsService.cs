@@ -2,6 +2,7 @@
 using Insurance.Application.Exceptions;
 using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
+using Insurance.Infrastructure.AuditingIntegration;
 using Insurance.Infrastructure.Repositories.Claims;
 
 namespace Insurance.Application.Services;
@@ -10,16 +11,16 @@ public class ClaimsService : IClaimsService
 {
     private readonly IClaimsRepository _claimsRepository;
     private readonly ICoversService _coversService;
-    //private readonly IAuditer _auditer;
+    private readonly IAuditingQueue _auditingQueue;
 
     public ClaimsService(
         IClaimsRepository claimsRepository,
-        ICoversService coversService)
-    //IAuditer auditer)
+        ICoversService coversService,
+        IAuditingQueue auditingQueue)
     {
         _claimsRepository = claimsRepository;
         _coversService = coversService;
-        //_auditer = auditer;
+        _auditingQueue = auditingQueue;
     }
 
     public async Task<ClaimDTO> CreateAsync(CreateClaim command)
@@ -42,7 +43,13 @@ public class ClaimsService : IClaimsService
         };
 
         await _claimsRepository.CreateAsync(claim);
-        //_auditer.AuditClaim(claim.Id, "POST");
+        await _auditingQueue.PublishAsync(new()
+        {
+            EntityChange = "Create",
+            EntityId = claim.Id,
+            EntityType = "Claim",
+            TimeStamp = DateTime.UtcNow
+        });
 
         return new ClaimDTO(claim.Id, claim.CoverId, claim.Name, claim.Created, claim.Type, claim.DamageCost);
     }
@@ -50,7 +57,13 @@ public class ClaimsService : IClaimsService
     public async Task DeleteAsync(DeleteClaim command)
     {
         await _claimsRepository.DeleteAsync(command.Id);
-        //_auditer.AuditClaim(command.Id, "DELETE");
+        await _auditingQueue.PublishAsync(new()
+        {
+            EntityChange = "Delete",
+            EntityId = command.Id,
+            EntityType = "Claim",
+            TimeStamp = DateTime.UtcNow
+        });
     }
 
     public async Task<IEnumerable<ClaimDTO>> GetAllAsync(GetClaims query) =>

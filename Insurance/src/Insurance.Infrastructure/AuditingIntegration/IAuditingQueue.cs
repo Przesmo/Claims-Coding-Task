@@ -1,4 +1,6 @@
-﻿namespace Insurance.Infrastructure.AuditingIntegration;
+﻿using Auditing.Host.Contracts;
+
+namespace Insurance.Infrastructure.AuditingIntegration;
 
 public interface IAuditingQueue
 {

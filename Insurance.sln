@@ -38,6 +38,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.ComponentTests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insurance.Application.Tests", "Insurance\tests\Insurance.Application.Tests\Insurance.Application.Tests.csproj", "{B8107293-CF16-43EC-B94A-B295CF177E32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auditing.Contract", "Auditing\src\Auditing.Contract\Auditing.Contract.csproj", "{9B8ADEA9-E9C4-41A4-BF69-C8184916CE3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{B8107293-CF16-43EC-B94A-B295CF177E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8107293-CF16-43EC-B94A-B295CF177E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8107293-CF16-43EC-B94A-B295CF177E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B8ADEA9-E9C4-41A4-BF69-C8184916CE3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B8ADEA9-E9C4-41A4-BF69-C8184916CE3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B8ADEA9-E9C4-41A4-BF69-C8184916CE3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B8ADEA9-E9C4-41A4-BF69-C8184916CE3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{E3146528-98BC-4817-B6FE-18FB53460198} = {4D8E981A-570E-4EC1-B5CE-97E2D7FA627A}
 		{B9F43601-F60D-4281-ADB3-F0204CDBD359} = {73634369-33A8-445B-A712-FE11F5FD2AFB}
 		{B8107293-CF16-43EC-B94A-B295CF177E32} = {73634369-33A8-445B-A712-FE11F5FD2AFB}
+		{9B8ADEA9-E9C4-41A4-BF69-C8184916CE3E} = {3D7FFFD4-031F-42E7-B829-4C4CA8DE5D0A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D4C1340-FBC4-4F35-944F-26237883E032}

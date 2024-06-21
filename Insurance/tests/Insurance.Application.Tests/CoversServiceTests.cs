@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Insurance.Application.Messages.Queries;
 using Insurance.Application.Services;
+using Insurance.Infrastructure.AuditingIntegration;
 using Insurance.Infrastructure.Repositories.Covers;
 using Moq;
 using Xunit;
@@ -11,11 +12,12 @@ public class CoversServiceTests
 {
     private readonly ICoversService _coversService;
     private readonly Mock<ICoversRepository> _coversRepositoryMock = new();
-    // private readonly Mock<IAuditer> _auditerMock = new();
+    private readonly Mock<IAuditingQueue> _auditingQueueMock = new();
 
     public CoversServiceTests()
     {
-        _coversService = new CoversService(_coversRepositoryMock.Object);
+        _coversService = new CoversService(_coversRepositoryMock.Object,
+            _auditingQueueMock.Object);
     }
 
     [Fact]

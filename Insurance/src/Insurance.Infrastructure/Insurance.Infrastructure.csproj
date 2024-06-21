@@ -12,4 +12,8 @@
     <PackageReference Include="EasyNetQ" Version="7.3.12" />
     <PackageReference Include="EasyNetQ.DI.Microsoft" Version="7.3.12" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Auditing\src\Auditing.Contract\Auditing.Contract.csproj" />
+  </ItemGroup>
 </Project>

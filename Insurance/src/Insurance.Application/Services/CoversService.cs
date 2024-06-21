@@ -1,6 +1,7 @@
 ﻿using Insurance.Application.DTOs;
 using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
+using Insurance.Infrastructure.AuditingIntegration;
 using Insurance.Infrastructure.Repositories.Covers;
 
 namespace Insurance.Application.Services;
@@ -8,12 +9,12 @@ namespace Insurance.Application.Services;
 public class CoversService : ICoversService
 {
     private readonly ICoversRepository _coversRepository;
-    //private readonly IAuditer _auditer;
+    private readonly IAuditingQueue _auditingQueue;
 
-    public CoversService(ICoversRepository coversRepository)
+    public CoversService(ICoversRepository coversRepository, IAuditingQueue auditingQueue)
     {
         _coversRepository = coversRepository;
-        //_auditer = auditer;
+        _auditingQueue = auditingQueue;
     }
 
     //ToDo: Fix and add tests
@@ -68,7 +69,13 @@ public class CoversService : ICoversService
             Type = command.Type
         };
         await _coversRepository.CreateAsync(cover);
-        //_auditer.AuditCover(cover.Id, "POST");
+        await _auditingQueue.PublishAsync(new()
+        {
+            EntityChange = "Create",
+            EntityId = cover.Id,
+            EntityType = "Cover",
+            TimeStamp = DateTime.UtcNow
+        });
 
         return new CoverDTO(cover.Id, cover.StartDate, cover.EndDate, cover.Type, cover.Premium);
     }
@@ -76,7 +83,13 @@ public class CoversService : ICoversService
     public async Task DeleteAsync(DeleteCover command)
     {
         await _coversRepository.DeleteAsync(command.Id);
-        //_auditer.AuditClaim(command.Id, "DELETE");
+        await _auditingQueue.PublishAsync(new()
+        {
+            EntityChange = "Delete",
+            EntityId = command.Id,
+            EntityType = "Cover",
+            TimeStamp = DateTime.UtcNow
+        });
     }
 
     public async Task<IEnumerable<CoverDTO>> GetAllAsync(GetCovers query) =>
