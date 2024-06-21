@@ -1,6 +1,7 @@
 using Insurance.Application;
 using Insurance.Host.ExceptionHandlers;
 using Insurance.Host.Swagger;
+using Insurance.Infrastructure.AuditingIntegration;
 using Insurance.Infrastructure.Repositories;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .RegisterRepositories(builder.Configuration)
+    .RegisterAuditingIntegration(builder.Configuration)
     .RegisterApplication()
     .AddControllers()
     .AddJsonOptions(x =>

@@ -9,5 +9,7 @@
   <ItemGroup>
     <PackageReference Include="MongoDB.EntityFrameworkCore" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="EasyNetQ" Version="7.3.12" />
+    <PackageReference Include="EasyNetQ.DI.Microsoft" Version="7.3.12" />
   </ItemGroup>
 </Project>
