@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using Auditing.Host.Contracts;
+using FluentAssertions;
+using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
 using Insurance.Application.Services;
 using Insurance.Infrastructure.AuditingIntegration;
@@ -75,5 +77,43 @@ public class CoversServiceTests
 
         // Assert
         result.Should().BeFalse();
+    }
+
+    [Fact]
+    public async Task DeleteAsync_WhenCoverIsRemoved_ShouldAuditLog()
+    {
+        // Arrange
+        var command = new DeleteCover
+        {
+            Id = "123"
+        };
+        _coversRepositoryMock.Setup(x => x.DeleteAsync(command.Id))
+            .Returns(Task.CompletedTask);
+
+        // Act
+        await _coversService.DeleteAsync(command);
+
+        // Assert
+        _auditingQueueMock.Verify(x => x.PublishAsync(It.IsAny<AddAuditLog>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task CreateAsync_WhenCoverIsCreated_ShouldAuditLog()
+    {
+        // Arrange
+        var command = new CreateCover
+        {
+            Type = CoverType.BulkCarrier,
+            StartDate = DateTime.UtcNow,
+            EndDate = DateTime.UtcNow.AddDays(10)
+        };
+        _coversRepositoryMock.Setup(x => x.CreateAsync(It.IsAny<Cover>()))
+            .Returns(Task.CompletedTask);
+
+        // Act
+        await _coversService.CreateAsync(command);
+
+        // Assert
+        _auditingQueueMock.Verify(x => x.PublishAsync(It.IsAny<AddAuditLog>()), Times.Once);
     }
 }

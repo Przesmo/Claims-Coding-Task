@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Auditing.Host.Contracts;
+using FluentAssertions;
 using Insurance.Application.Exceptions;
 using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
@@ -65,8 +66,7 @@ public class ClaimsServiceTests
             Name = "Name",
             Type = ClaimType.Fire
         };
-        var isCoveredQuery = new IsDateCovered { CoverId = command.CoverId, DateToCover = command.Created };
-        _coversServiceMock.Setup(x => x.IsDateCoveredAsync(isCoveredQuery))
+        _coversServiceMock.Setup(x => x.IsDateCoveredAsync(It.IsAny<IsDateCovered>()))
             .ReturnsAsync(true);
         _claimsRepositoryMock.Setup(x => x.CreateAsync(It.IsAny<Claim>()))
             .Returns(Task.CompletedTask);
@@ -75,7 +75,7 @@ public class ClaimsServiceTests
         var result = await _claimsService.CreateAsync(command);
 
         // Assert
-        //_auditerMock.Verify(x => x.AuditClaim(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        _auditingQueueMock.Verify(x => x.PublishAsync(It.IsAny<AddAuditLog>()), Times.Once);
     }
 
     [Fact]
@@ -100,5 +100,23 @@ public class ClaimsServiceTests
 
         // Assert
         exception.Message.Should().BeEquivalentTo($"Claim with coverId: {command.CoverId} is not covered for the date: {command.Created:dd/MM/yyyy}");
+    }
+
+    [Fact]
+    public async Task DeleteAsync_WhenClaimIsRemoved_ShouldAuditLog()
+    {
+        // Arrange
+        var command = new DeleteClaim
+        {
+            Id = "123"
+        };
+        _claimsRepositoryMock.Setup(x => x.DeleteAsync(command.Id))
+            .Returns(Task.CompletedTask);
+
+        // Act
+        await _claimsService.DeleteAsync(command);
+
+        // Assert
+        _auditingQueueMock.Verify(x => x.PublishAsync(It.IsAny<AddAuditLog>()), Times.Once);
     }
 }
