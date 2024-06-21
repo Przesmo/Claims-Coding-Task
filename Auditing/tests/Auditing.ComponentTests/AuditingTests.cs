@@ -11,12 +11,12 @@ namespace Auditing.ComponentTests;
 public class AuditingTests
 {
     private readonly MessagesPublisher _messagesPublisher;
-    private readonly AuditLogRepositoryTestDouble _repositoryTestDouble;
+    private readonly AuditTestRepository _testRepository;
 
     public AuditingTests(ComponentTestsFixture componentTestsFixture)
     {
         _messagesPublisher = componentTestsFixture.MessagesPublisher;
-        _repositoryTestDouble = componentTestsFixture.RepositoryTestDouble;
+        _testRepository = componentTestsFixture.AuditTestRepository;
     }
 
     [Fact]
@@ -36,8 +36,8 @@ public class AuditingTests
         AuditLog? auditLog = null;
         for (var i = 0; i < 5 && auditLog is null; i++)
         {
-            await Task.Delay(1000);
-            auditLog = _repositoryTestDouble.Get();
+            await Task.Delay(2000);
+            auditLog = await _testRepository.GetFirstAsync();
         }
 
         auditLog.Should().NotBeNull();

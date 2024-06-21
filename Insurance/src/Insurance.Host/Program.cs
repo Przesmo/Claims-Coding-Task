@@ -9,6 +9,11 @@ using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.SetBasePath(AppContext.BaseDirectory)
+    .AddJsonFile("appsettings.json")
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true)
+    .AddEnvironmentVariables()
+    .Build();
 
 builder.Services
     .RegisterRepositories(builder.Configuration)

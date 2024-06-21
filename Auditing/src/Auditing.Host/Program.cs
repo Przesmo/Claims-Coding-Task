@@ -7,6 +7,11 @@ using EasyNetQ.Consumer;
 using Microsoft.EntityFrameworkCore;
 
 var builder = Host.CreateApplicationBuilder(args);
+builder.Configuration.SetBasePath(AppContext.BaseDirectory)
+    .AddJsonFile("appsettings.json")
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true)
+    .AddEnvironmentVariables()
+    .Build();
 
 builder.Services
     .RegisterAuditLogsRepository(builder.Configuration)
@@ -18,12 +23,9 @@ builder.Services
 
 var host = builder.Build();
 
-if (builder.Environment.EnvironmentName != "test")
-{
-    using var scope = host.Services.CreateScope();
-    var context = scope.ServiceProvider.GetRequiredService<AuditContext>();
-    context.Database.Migrate();
-}
+using var scope = host.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<AuditContext>();
+context.Database.Migrate();
 
 host.Run();
 

@@ -11,12 +11,12 @@ public class ComponentTestsFixture : IAsyncLifetime
     private readonly WebApplicationFactory<Program> _application = CustomWebApplicationFactory<Program>.Instance;
     private readonly DockerInfrastructureFixture _infrastructure = new();
 
-    public AuditLogRepositoryTestDouble RepositoryTestDouble { get; private set; } = null!;
+    public AuditTestRepository AuditTestRepository { get; private set; } = null!;
     public MessagesPublisher MessagesPublisher { get; private set; } = null!;
 
     public Task InitializeAsync()
     {
-        RepositoryTestDouble = _application.Services.GetRequiredService<AuditLogRepositoryTestDouble>();
+        AuditTestRepository = _application.Services.GetRequiredService<AuditTestRepository>();
         var bus = _application.Services.GetRequiredService<IBus>();
         MessagesPublisher = new MessagesPublisher(bus);
         return Task.CompletedTask;
