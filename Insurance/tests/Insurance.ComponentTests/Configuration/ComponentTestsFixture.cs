@@ -1,5 +1,4 @@
-﻿using Insurance.Infrastructure.Repositories.Claims;
-using Insurance.Infrastructure.Repositories.Database;
+﻿using Insurance.Infrastructure.Repositories.Database;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -29,15 +28,7 @@ public class ComponentTestsFixture : IAsyncLifetime
     private async Task SeedDatabase()
     {
         var mongoContext = _application.Services.GetRequiredService<InsuranceContext>();
-        await mongoContext.Claims.AddAsync(new Claim
-        {
-            Id = Guid.Empty.ToString(),
-            Created = DateTime.UtcNow,
-            CoverId = "test",
-            DamageCost = 1,
-            Name = "test",
-            Type = ClaimType.Fire
-        });
+        await mongoContext.Claims.AddRangeAsync(ClaimsTestData.Claims);
         await mongoContext.SaveChangesAsync();
     }
 }
