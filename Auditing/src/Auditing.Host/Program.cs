@@ -2,12 +2,14 @@ using Auditing.Host;
 using Auditing.Host.HealthChekcs;
 using Auditing.Host.MessagesConsumer;
 using Auditing.Host.MessagesHandler;
+using Auditing.Host.Metrics;
 using Auditing.Host.Repositories;
 using Auditing.Infrastructure;
 using EasyNetQ.Consumer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
-var builder = Host.CreateApplicationBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.SetBasePath(AppContext.BaseDirectory)
     .AddJsonFile("appsettings.json")
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true)
@@ -21,14 +23,16 @@ builder.Services
     .Decorate<IAddAuditLogHandler, LoggingHandler>()
     .AddSingleton<IConsumer, CustomConsumer>()
     .ConfigureHealthChecks(builder.Configuration)
+    .ConfigureMetrics()
     .AddHostedService<ConsumerSubscriptionService>();
 
-var host = builder.Build();
+var app = builder.Build();
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
 
-using var scope = host.Services.CreateScope();
+using var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<AuditContext>();
 context.Database.Migrate();
 
-host.Run();
+app.Run();
 
 public partial class Program { }

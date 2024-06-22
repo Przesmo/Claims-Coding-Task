@@ -8,8 +8,8 @@ public static class HealthChecksConfiguration
         IConfiguration configuration)
     {
         services.AddHealthChecks()
-            .AddSqlServer(configuration.GetConnectionString("DefaultConnection")!)
-            .AddRabbitMQ(rabbitConnectionString: configuration["Bus:ConnectionString"]!);
+            .AddSqlServer(configuration.GetConnectionString("DefaultConnection")!);
+            //.AddRabbitMQ(rabbitConnectionString: configuration["Bus:ConnectionString"]!);
         return services;
     }
 }
