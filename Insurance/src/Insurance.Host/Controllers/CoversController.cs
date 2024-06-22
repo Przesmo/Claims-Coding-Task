@@ -20,7 +20,7 @@ public class CoversController : ControllerBase
         _coversService = coversService;
     }
 
-    [HttpGet("premium/compute")]
+    [HttpGet("premium")]
     public decimal ComputePremiumAsync([FromQuery] ComputePremium query) =>
        PremiumCalculator.Calculate(query);
 

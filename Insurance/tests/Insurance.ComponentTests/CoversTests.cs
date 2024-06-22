@@ -178,4 +178,25 @@ public class CoversTests
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
+
+    [Fact]
+    public async Task CalculatePremium_WhenValidData_ShouldReturnPremium()
+    {
+        // Arrange
+        var expectedPremium = 27500m;
+        var query = $"startDate={DateTime.UtcNow:yyyy-MM-ddTHH:mm:ss}&" +
+            $"endDate={DateTime.UtcNow.AddDays(20):yyyy-MM-ddTHH:mm:ss}&" +
+            $"coverType={CoverType.Yacht}";
+        var requestMessage = new HttpRequestMessage(HttpMethod.Get,
+            $"v1/Covers/premium?{query}");
+
+        // Act
+        var response = await _httpClient.SendAsync(requestMessage);
+
+        // Assert
+        response.Should().BeSuccessful();
+        var content = await response.Content.ReadAsStringAsync();
+        var premium = JsonConvert.DeserializeObject<decimal>(content);
+        premium.Should().Be(expectedPremium);
+    }
 }
