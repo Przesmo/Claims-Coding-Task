@@ -1,5 +1,6 @@
 ﻿using Auditing.Host.Contracts;
 using FluentAssertions;
+using Insurance.Application.Exceptions;
 using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
 using Insurance.Application.Services;
@@ -115,5 +116,24 @@ public class CoversServiceTests
 
         // Assert
         _auditingQueueMock.Verify(x => x.PublishAsync(It.IsAny<AddAuditLog>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task CreateAsync_WhenInsurancePeriodExceeded_ShouldThrowException()
+    {
+        // Arrange
+        var command = new CreateCover
+        {
+            Type = CoverType.BulkCarrier,
+            StartDate = DateTime.UtcNow,
+            EndDate = DateTime.UtcNow.AddDays(400)
+        };
+
+        // Act
+        var exception = await Assert.ThrowsAsync<InsurancePeriodExceededException>(async () =>
+            await _coversService.CreateAsync(command));
+
+        // Assert
+        exception.Message.Should().BeEquivalentTo("Maximum insurance period of 365 days has been exceeded");
     }
 }

@@ -94,7 +94,7 @@ public class ClaimsServiceTests
         _coversServiceMock.Setup(x => x.IsDateCoveredAsync(isCoveredQuery))
             .ReturnsAsync(false);
 
-        // Act & Assert
+        // Act
         var exception = await Assert.ThrowsAsync<ClaimNotCoveredException>(async () =>
             await _claimsService.CreateAsync(command));
 

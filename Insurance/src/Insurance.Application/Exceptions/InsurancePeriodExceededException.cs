@@ -3,7 +3,7 @@
 public class InsurancePeriodExceededException : Exception
 {
     public InsurancePeriodExceededException(int maximumInsurnacePeriodDays)
-        : base($"Maximum insurance period of {maximumInsurnacePeriodDays} days has been exceed")
+        : base($"Maximum insurance period of {maximumInsurnacePeriodDays} days has been exceeded")
     {
     }
 }
