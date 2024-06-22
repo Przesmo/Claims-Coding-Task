@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Insurance.Application.DTOs;
+using Insurance.Application.Messages.Commands;
 using Insurance.ComponentTests.Configuration;
 using Insurance.Infrastructure.Repositories.Claims;
 using Newtonsoft.Json;
@@ -38,7 +39,7 @@ public class ClaimsTests
     }
 
     [Fact]
-    public async Task GetClaim_WhenNotExisits_ShouldReturnNotFound()
+    public async Task GetClaim_WhenNotExisits_ShouldReturnNoContent()
     {
         // Arrange
         var requestMessage = new HttpRequestMessage(HttpMethod.Get,
@@ -77,8 +78,14 @@ public class ClaimsTests
         var createdDate = DateTime.UtcNow.AddDays(-5);
         var coverId = CoversTestData.Covers.First(x =>
                 x.StartDate < createdDate && x.EndDate > createdDate).Id;
-        var claim = new ClaimDTO(string.Empty, coverId, "Test", createdDate,
-            ClaimType.Grounding, 100);
+        var claim = new CreateClaim
+        {
+            CoverId = coverId,
+            Name = "Test",
+            Type = ClaimType.Grounding,
+            Created = createdDate,
+            DamageCost = 100,
+        };
         var requestMessage = new HttpRequestMessage(HttpMethod.Post,
             $"v1/Claims");
         requestMessage.Content = new StringContent(JsonConvert.SerializeObject(claim),
@@ -105,8 +112,14 @@ public class ClaimsTests
         // Arrange
         var createdDate = DateTime.UtcNow.AddDays(-5000);
         var coverId = CoversTestData.Covers.First().Id;
-        var claim = new ClaimDTO(string.Empty, coverId, "Test", createdDate,
-            ClaimType.Grounding, 100);
+        var claim = new CreateClaim
+        {
+            CoverId = coverId,
+            Name = "Test",
+            Type = ClaimType.Grounding,
+            Created = createdDate,
+            DamageCost = 100,
+        };
         var requestMessage = new HttpRequestMessage(HttpMethod.Post,
             $"v1/Claims");
         requestMessage.Content = new StringContent(JsonConvert.SerializeObject(claim),
@@ -125,8 +138,14 @@ public class ClaimsTests
         // Arrange
         var createdDate = DateTime.UtcNow.AddDays(-5);
         var coverId = CoversTestData.Covers.First().Id;
-        var claim = new ClaimDTO(string.Empty, coverId, "Test", createdDate,
-            ClaimType.Grounding, 1000001);
+        var claim = new CreateClaim
+        {
+            CoverId = coverId,
+            Name = "Test",
+            Type = ClaimType.Grounding,
+            Created = createdDate,
+            DamageCost = 1000001,
+        };
         var requestMessage = new HttpRequestMessage(HttpMethod.Post,
             $"v1/Claims");
         requestMessage.Content = new StringContent(JsonConvert.SerializeObject(claim),
@@ -137,5 +156,19 @@ public class ClaimsTests
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task DeleteClaim_WhenExisits_ShouldReturnRemove()
+    {
+        // Arrange
+        var requestMessage = new HttpRequestMessage(HttpMethod.Delete,
+            $"v1/Claims/{ClaimsTestData.ClaimToDeleteId}");
+
+        // Act
+        var response = await _httpClient.SendAsync(requestMessage);
+
+        // Assert
+        response.Should().BeSuccessful();
     }
 }

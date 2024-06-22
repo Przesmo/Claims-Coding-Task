@@ -4,6 +4,8 @@ namespace Insurance.ComponentTests;
 
 public static class CoversTestData
 {
+    public static string CoverToDeleteId = Guid.NewGuid().ToString();
+
     public static IEnumerable<Cover> Covers = new List<Cover>
     {
         new Cover
@@ -32,7 +34,7 @@ public static class CoversTestData
         },
         new Cover
         {
-            Id = Guid.NewGuid().ToString(),
+            Id = CoverToDeleteId,
             StartDate = DateTime.UtcNow.AddDays(2),
             EndDate = DateTime.UtcNow.AddDays(20),
             Premium = 60,

@@ -4,6 +4,8 @@ namespace Insurance.ComponentTests;
 
 public static class ClaimsTestData
 {
+    public static string ClaimToDeleteId = Guid.NewGuid().ToString();
+
     public static IEnumerable<Claim> Claims = new List<Claim>
     {
         new Claim
@@ -40,6 +42,15 @@ public static class ClaimsTestData
             Created = DateTime.UtcNow.AddDays(-50),
             DamageCost = 10,
             Name = "Claim4",
+            Type = ClaimType.Fire
+        },
+        new Claim
+        {
+            Id = ClaimToDeleteId,
+            CoverId = Guid.NewGuid().ToString(),
+            Created = DateTime.UtcNow.AddDays(-50),
+            DamageCost = 10,
+            Name = "Claim5",
             Type = ClaimType.Fire
         }
     };
