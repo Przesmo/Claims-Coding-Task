@@ -1,4 +1,7 @@
-﻿using Insurance.ComponentTests.Configuration;
+﻿using FluentAssertions;
+using Insurance.Application.DTOs;
+using Insurance.ComponentTests.Configuration;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace Insurance.ComponentTests;
@@ -14,8 +17,19 @@ public class ClaimsTests
     }
 
     [Fact]
-    public void Valid()
+    public async Task GetClaim_WhenExisits_ShouldReturnClaim()
     {
-        Assert.Equal(1, 1);
+        // Arrange
+        var requestMessage = new HttpRequestMessage(HttpMethod.Get,
+            $"v1/Claims/{Guid.Empty}");
+
+        // Act
+        var response = await _httpClient.SendAsync(requestMessage);
+
+        // Assert
+        response.Should().BeSuccessful();
+        var content = await response.Content.ReadAsStringAsync();
+        var claim = JsonConvert.DeserializeObject<ClaimDTO>(content);
+        claim.Should().NotBeNull();
     }
 }

@@ -26,7 +26,7 @@ public class ClaimsService : IClaimsService
     public async Task<ClaimDTO> CreateAsync(CreateClaim command)
     {
         var isCovered = await _coversService.IsDateCoveredAsync(
-            new IsDateCovered{ CoverId = command.CoverId, DateToCover = command.Created });
+            new IsDateCovered { CoverId = command.CoverId, DateToCover = command.Created });
         if (!isCovered)
         {
             throw new ClaimNotCoveredException(command.CoverId, command.Created);

@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace Insurance.ComponentTests.Configuration;
 
-internal class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram> where TProgram : class
+internal class CustomWebApplicationFactory<TProgram> :
+    WebApplicationFactory<TProgram> where TProgram : class
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -11,9 +12,6 @@ internal class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TPr
         builder.UseEnvironment("test");
     }
 
-    public static WebApplicationFactory<TProgram> Instance { get; } = new CustomWebApplicationFactory<TProgram>()
-        .WithWebHostBuilder(builder =>
-        {
-            builder.Configure(_ => { });
-        });
+    public static WebApplicationFactory<TProgram> Instance { get; } =
+        new CustomWebApplicationFactory<TProgram>();
 }
