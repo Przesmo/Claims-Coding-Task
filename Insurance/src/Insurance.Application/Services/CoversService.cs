@@ -4,6 +4,7 @@ using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
 using Insurance.Infrastructure.AuditingIntegration;
 using Insurance.Infrastructure.Repositories.Covers;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Insurance.Application.Services;
 
@@ -11,9 +12,7 @@ public class CoversService : ICoversService
 {
     private readonly ICoversRepository _coversRepository;
     private readonly IAuditingQueue _auditingQueue;
-    // Just to simplify things, assumed 1 year insureance period equals 365 days
-    private const int MaximumInsurancePeriodDays = 365;
-
+    
     public CoversService(ICoversRepository coversRepository, IAuditingQueue auditingQueue)
     {
         _coversRepository = coversRepository;
@@ -97,9 +96,10 @@ public class CoversService : ICoversService
 
     public async Task<CoverDTO> CreateAsync(CreateCover command)
     {
-        if (command.EndDate.Subtract(command.StartDate).TotalDays > MaximumInsurancePeriodDays)
+        var insuranceLength = (command.EndDate - command.StartDate).Days;
+        if (insuranceLength > CoversOptions.MaximumInsurancePeriodDays)
         {
-            throw new InsurancePeriodExceededException(MaximumInsurancePeriodDays);
+            throw new InsurancePeriodExceededException(CoversOptions.MaximumInsurancePeriodDays);
         }
 
         var computePremiumQuery = new ComputePremium
