@@ -1,5 +1,5 @@
 ﻿using Auditing.ComponentTests.Configuration;
-using Auditing.ComponentTests.TestDoubles;
+using Auditing.ComponentTests.TestHelpers;
 using Auditing.Host.Contracts;
 using Auditing.Host.Repositories;
 using FluentAssertions;

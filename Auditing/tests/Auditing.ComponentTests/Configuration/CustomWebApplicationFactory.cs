@@ -1,4 +1,4 @@
-﻿using Auditing.ComponentTests.TestDoubles;
+﻿using Auditing.ComponentTests.TestHelpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;

@@ -1,4 +1,4 @@
-﻿using Auditing.ComponentTests.TestDoubles;
+﻿using Auditing.ComponentTests.TestHelpers;
 using EasyNetQ;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;

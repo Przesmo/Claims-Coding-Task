@@ -2,7 +2,7 @@
 using Auditing.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
-namespace Auditing.ComponentTests.TestDoubles;
+namespace Auditing.ComponentTests.TestHelpers;
 
 public class AuditTestRepository
 {

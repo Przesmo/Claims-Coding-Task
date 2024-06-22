@@ -2,7 +2,7 @@
 using EasyNetQ;
 using EasyNetQ.Topology;
 
-namespace Auditing.ComponentTests.TestDoubles;
+namespace Auditing.ComponentTests.TestHelpers;
 
 public class MessagesPublisher
 {
