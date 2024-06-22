@@ -1,4 +1,5 @@
-﻿using Insurance.Application.Messages.Queries;
+﻿using Insurance.Application.Exceptions;
+using Insurance.Application.Messages.Queries;
 using Insurance.Infrastructure.Repositories.Covers;
 
 namespace Insurance.Application.Services;
@@ -20,6 +21,10 @@ public static class PremiumCalculator
     public static decimal Calculate(ComputePremium query)
     {
         var insuranceLength = (query.EndDate - query.StartDate).Days;
+        if (insuranceLength > CoversOptions.MaximumInsurancePeriodDays)
+        {
+            throw new InsurancePeriodExceededException(CoversOptions.MaximumInsurancePeriodDays);
+        }
 
         var firstPeriod = Math.Min(insuranceLength, FirstPeriodDays);
         var secondPeriod = Math.Min(Math.Max(insuranceLength - firstPeriod, 0), SecondPeriodDays);
