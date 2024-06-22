@@ -1,13 +1,13 @@
 using Insurance.Application;
 using Insurance.Host.ExceptionHandlers;
 using Insurance.Host.HealthChecks;
+using Insurance.Host.Metrics;
 using Insurance.Host.Swagger;
 using Insurance.Infrastructure.AuditingIntegration;
 using Insurance.Infrastructure.Repositories;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text.Json.Serialization;
-
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.SetBasePath(AppContext.BaseDirectory)
@@ -43,6 +43,7 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
     .ConfigureHealthChecks(builder.Configuration)
+    .ConfigureMetrics()
     .AddExceptionHandler<ClaimNotCoveredExceptionHandler>()
     .AddExceptionHandler<InsurancePeriodExceededExceptionHandler>()
     .AddExceptionHandler<GlobalExceptionHandler>()
@@ -60,6 +61,7 @@ app.UseExceptionHandler()
            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
        }
    })
+   .UseOpenTelemetryPrometheusScrapingEndpoint()
    .UseHttpsRedirection()
    .UseAuthorization();
 app.MapControllers();
