@@ -22,7 +22,7 @@ public class CoversController : ControllerBase
 
     [HttpGet("premium/compute")]
     public decimal ComputePremiumAsync([FromQuery] ComputePremium query) =>
-        _coversService.ComputePremium(query);
+       PremiumCalculator.Calculate(query);
 
     [HttpGet]
     public async Task<IEnumerable<CoverDTO>> GetAllAsync([FromQuery] GetCovers query) =>
