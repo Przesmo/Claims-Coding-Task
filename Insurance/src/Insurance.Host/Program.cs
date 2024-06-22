@@ -1,5 +1,6 @@
 using Insurance.Application;
 using Insurance.Host.ExceptionHandlers;
+using Insurance.Host.HealthChecks;
 using Insurance.Host.Swagger;
 using Insurance.Infrastructure.AuditingIntegration;
 using Insurance.Infrastructure.Repositories;
@@ -41,6 +42,7 @@ builder.Services
     .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
+    .ConfigureHealthChecks(builder.Configuration)
     .AddExceptionHandler<ClaimNotCoveredExceptionHandler>()
     .AddExceptionHandler<InsurancePeriodExceededExceptionHandler>()
     .AddExceptionHandler<GlobalExceptionHandler>()
