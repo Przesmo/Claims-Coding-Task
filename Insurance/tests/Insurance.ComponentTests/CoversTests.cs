@@ -156,4 +156,26 @@ public class CoversTests
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
+
+    [Fact]
+    public async Task CreateCover_WhenEndDateIsBeforeStartDate_ShouldReturnBadRequest()
+    {
+        // Arrange
+        var cover = new CreateCover
+        {
+            StartDate = DateTime.UtcNow.AddDays(10),
+            EndDate = DateTime.UtcNow.AddDays(1),
+            Type = CoverType.Tanker
+        };
+        var requestMessage = new HttpRequestMessage(HttpMethod.Post,
+            $"v1/Covers");
+        requestMessage.Content = new StringContent(JsonConvert.SerializeObject(cover),
+            Encoding.UTF8, "application/json");
+
+        // Act
+        var response = await _httpClient.SendAsync(requestMessage);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
 }

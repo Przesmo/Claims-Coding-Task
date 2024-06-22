@@ -10,6 +10,7 @@ public class CreateCover
     public DateTime StartDate { get; set; }
 
     [Required]
+    [DateGreaterThan("StartDate")]
     public DateTime EndDate { get; set; }
 
     [Required]
