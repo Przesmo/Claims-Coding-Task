@@ -55,6 +55,46 @@ public class CoversService : ICoversService
         return totalPremium;
     }
 
+    public decimal ComputePremium2(ComputePremium query)
+    {
+        const int firstPeriodDays = 30;
+        const int secondPeriodDays = 180;
+        const decimal yachtDiscount1 = 0.05m;
+        const decimal yachtDiscount2 = 0.08m;
+        const decimal otherDiscount1 = 0.02m;
+        const decimal otherDiscount2 = 0.03m;
+
+        var multiplier = query.CoverType switch
+        {
+            CoverType.Yacht => 1.1m,
+            CoverType.PassengerShip => 1.2m,
+            CoverType.Tanker => 1.5m,
+            _ => 1.3m
+        };
+
+        var premiumPerDay = 1250 * multiplier;
+        var insuranceLength = (query.EndDate - query.StartDate).Days;
+
+        var firstPeriod = Math.Min(insuranceLength, firstPeriodDays);
+        var secondPeriod = Math.Min(Math.Max(insuranceLength - firstPeriod, 0), secondPeriodDays);
+        var thirdPeriod = Math.Max(insuranceLength - secondPeriod, 0);
+
+        var totalPremium = firstPeriod * premiumPerDay;
+
+        if (query.CoverType == CoverType.Yacht)
+        {
+            totalPremium += secondPeriod * premiumPerDay * (1 - yachtDiscount1);
+            totalPremium += thirdPeriod * premiumPerDay * (1 - yachtDiscount2);
+        }
+        else
+        {
+            totalPremium += secondPeriod * premiumPerDay * (1 - otherDiscount1);
+            totalPremium += thirdPeriod * premiumPerDay * (1 - otherDiscount2);
+        }
+
+        return totalPremium;
+    }
+
     public async Task<CoverDTO> CreateAsync(CreateCover command)
     {
         if (command.EndDate.Subtract(command.StartDate).TotalDays > MaximumInsurancePeriodDays)
