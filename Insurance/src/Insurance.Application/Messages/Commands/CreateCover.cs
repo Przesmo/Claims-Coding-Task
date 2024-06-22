@@ -6,6 +6,7 @@ namespace Insurance.Application.Messages.Commands;
 public class CreateCover
 {
     [Required]
+    [DateIsGreaterThanToday]
     public DateTime StartDate { get; set; }
 
     [Required]
