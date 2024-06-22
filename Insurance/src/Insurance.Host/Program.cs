@@ -42,6 +42,7 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
     .AddExceptionHandler<ClaimNotCoveredExceptionHandler>()
+    .AddExceptionHandler<InsurancePeriodExceededExceptionHandler>()
     .AddExceptionHandler<GlobalExceptionHandler>()
     .AddProblemDetails();
 

@@ -1,4 +1,5 @@
 ﻿using Insurance.Application.DTOs;
+using Insurance.Application.Exceptions;
 using Insurance.Application.Messages.Commands;
 using Insurance.Application.Messages.Queries;
 using Insurance.Infrastructure.AuditingIntegration;
@@ -10,6 +11,8 @@ public class CoversService : ICoversService
 {
     private readonly ICoversRepository _coversRepository;
     private readonly IAuditingQueue _auditingQueue;
+    // Just to simplify things, assumed 1 year insureance period equals 365 days
+    private const int MaximumInsurancePeriodDays = 365;
 
     public CoversService(ICoversRepository coversRepository, IAuditingQueue auditingQueue)
     {
@@ -54,6 +57,11 @@ public class CoversService : ICoversService
 
     public async Task<CoverDTO> CreateAsync(CreateCover command)
     {
+        if (command.EndDate.Subtract(command.StartDate).TotalDays > MaximumInsurancePeriodDays)
+        {
+            throw new InsurancePeriodExceededException(MaximumInsurancePeriodDays);
+        }
+
         var computePremiumQuery = new ComputePremium
         {
             CoverType = command.Type,
