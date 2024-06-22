@@ -1,4 +1,5 @@
 using Auditing.Host;
+using Auditing.Host.HealthChekcs;
 using Auditing.Host.MessagesConsumer;
 using Auditing.Host.MessagesHandler;
 using Auditing.Host.Repositories;
@@ -19,6 +20,7 @@ builder.Services
     .AddSingleton<IAddAuditLogHandler, AddAuditLogHandler>()
     .Decorate<IAddAuditLogHandler, LoggingHandler>()
     .AddSingleton<IConsumer, CustomConsumer>()
+    .ConfigureHealthChecks(builder.Configuration)
     .AddHostedService<ConsumerSubscriptionService>();
 
 var host = builder.Build();
