@@ -10,6 +10,7 @@ namespace Insurance.Host.Controllers;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("v{version:apiVersion}/[controller]")]
+[Produces("application/json")]
 public class ClaimsController : ControllerBase
 {
     private readonly IClaimsService _claimsService;
@@ -24,6 +25,7 @@ public class ClaimsController : ControllerBase
         await _claimsService.GetAllAsync(query);
 
     [HttpPost]
+    [Consumes("application/json")]
     public async Task<ClaimDTO> CreateAsync([FromBody] CreateClaim command) =>
         await _claimsService.CreateAsync(command);
 

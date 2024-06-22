@@ -41,8 +41,8 @@ builder.Services
     .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
-    .AddExceptionHandler<GlobalExceptionHandler>()
     .AddExceptionHandler<ClaimNotCoveredExceptionHandler>()
+    .AddExceptionHandler<GlobalExceptionHandler>()
     .AddProblemDetails();
 
 var app = builder.Build();

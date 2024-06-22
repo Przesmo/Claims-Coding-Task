@@ -29,6 +29,7 @@ public class ComponentTestsFixture : IAsyncLifetime
     {
         var mongoContext = _application.Services.GetRequiredService<InsuranceContext>();
         await mongoContext.Claims.AddRangeAsync(ClaimsTestData.Claims);
+        await mongoContext.Covers.AddRangeAsync(CoversTestData.Covers);
         await mongoContext.SaveChangesAsync();
     }
 }

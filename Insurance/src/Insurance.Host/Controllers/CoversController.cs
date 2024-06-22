@@ -10,6 +10,7 @@ namespace Insurance.Host.Controllers;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("v{version:apiVersion}/[controller]")]
+[Produces("application/json")]
 public class CoversController : ControllerBase
 {
     private readonly ICoversService _coversService;
@@ -32,6 +33,7 @@ public class CoversController : ControllerBase
         await _coversService.GetAsync(query);
 
     [HttpPost]
+    [Consumes("application/json")]
     public async Task<CoverDTO> CreateAsync([FromBody] CreateCover command) =>
         await _coversService.CreateAsync(command);
 
