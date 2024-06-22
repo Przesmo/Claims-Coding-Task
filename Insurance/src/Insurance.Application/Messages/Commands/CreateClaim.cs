@@ -18,6 +18,7 @@ public class CreateClaim
     public ClaimType Type { get; set; }
 
     [Required]
-    [Range(0, 1000000)]
+    [Range(0, 1000000,
+        ErrorMessage = "The {0} value needs to be between {1} and {2}")]
     public decimal DamageCost { get; set; }
 }

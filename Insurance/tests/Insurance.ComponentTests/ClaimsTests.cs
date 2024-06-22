@@ -118,4 +118,24 @@ public class ClaimsTests
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
+
+    [Fact]
+    public async Task CreateClaims_WhenDamageCostToHigh_ShouldReturnBadRequest()
+    {
+        // Arrange
+        var createdDate = DateTime.UtcNow.AddDays(-5);
+        var coverId = CoversTestData.Covers.First().Id;
+        var claim = new ClaimDTO(string.Empty, coverId, "Test", createdDate,
+            ClaimType.Grounding, 1000001);
+        var requestMessage = new HttpRequestMessage(HttpMethod.Post,
+            $"v1/Claims");
+        requestMessage.Content = new StringContent(JsonConvert.SerializeObject(claim),
+            Encoding.UTF8, "application/json");
+
+        // Act
+        var response = await _httpClient.SendAsync(requestMessage);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
 }
