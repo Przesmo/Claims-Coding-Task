@@ -9,7 +9,6 @@ public static class HealthChecksConfiguration
     {
         services.AddHealthChecks()
             .AddSqlServer(configuration.GetConnectionString("DefaultConnection")!);
-            //.AddRabbitMQ(rabbitConnectionString: configuration["Bus:ConnectionString"]!);
         return services;
     }
 }

@@ -28,7 +28,7 @@ public class CoversController : ControllerBase
     public async Task<IEnumerable<CoverDTO>> GetAllAsync([FromQuery] GetCovers query) =>
         await _coversService.GetAllAsync(query);
 
-    [HttpGet("{id}")]
+    [HttpGet("{Id}")]
     public async Task<CoverDTO?> GetAsync([FromRoute] GetCover query) =>
         await _coversService.GetAsync(query);
 
@@ -37,7 +37,7 @@ public class CoversController : ControllerBase
     public async Task<CoverDTO> CreateAsync([FromBody] CreateCover command) =>
         await _coversService.CreateAsync(command);
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{Id}")]
     public async Task DeleteAsync([FromRoute] DeleteCover command) =>
         await _coversService.DeleteAsync(command);
 }

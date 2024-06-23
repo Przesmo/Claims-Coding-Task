@@ -7,7 +7,6 @@ public static class HealthChecksConfiguration
     {
         services.AddHealthChecks()
             .AddMongoDb(configuration["MongoDb:ConnectionString"]!);
-            //.AddRabbitMQ(rabbitConnectionString: configuration["Bus:ConnectionString"]!);
         return services;
     }
 }

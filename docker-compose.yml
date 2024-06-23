@@ -1,11 +1,31 @@
 version: "3.2"
 services:
+  insurnace-api:
+    image: insurance-api
+    build:
+      context: .
+      dockerfile: Insurance/src/Insurance.Host/Dockerfile
+    ports:
+      - "5000:8080"
+    depends_on:
+      - mongo-db
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+        
   mongo-db:
     container_name: mongo-db
     image: mongo
     restart: always
     ports:
       - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "testUser"
+      MONGO_INITDB_ROOT_PASSWORD: "testPassword"  
 
   mongo-express:
     image: mongo-express
@@ -24,5 +44,5 @@ services:
     ports:
       - "14330:1433"
     environment:
-      SA_PASSWORD: "P@ssw0rd!"
+      SA_PASSWORD: "Strong_password"
       ACCEPT_EULA: "Y"

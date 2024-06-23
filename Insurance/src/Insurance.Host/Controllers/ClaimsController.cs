@@ -29,11 +29,11 @@ public class ClaimsController : ControllerBase
     public async Task<ClaimDTO> CreateAsync([FromBody] CreateClaim command) =>
         await _claimsService.CreateAsync(command);
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{Id}")]
     public async Task DeleteAsync([FromRoute] DeleteClaim command) =>
         await _claimsService.DeleteAsync(command);
 
-    [HttpGet("{id}")]
+    [HttpGet("{Id}")]
     public async Task<ClaimDTO?> GetAsync([FromRoute] GetClaim query) =>
         await _claimsService.GetAsync(query);
 }
