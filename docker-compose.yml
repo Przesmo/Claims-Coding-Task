@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3.4"
 services:
   insurnace-api:
     image: insurance-api
@@ -9,6 +9,18 @@ services:
       - "5000:8080"
     depends_on:
       - mongo-db
+      - rabbitmq
+
+  auditing-worker:
+    image: auditing-worker
+    build:
+      context: .
+      dockerfile: Auditing/src/Auditing.Host/Dockerfile
+    ports:
+      - "5001:8080"
+    depends_on:
+      sql-server-db:
+        condition: service_healthy
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -27,22 +39,18 @@ services:
       MONGO_INITDB_ROOT_USERNAME: "testUser"
       MONGO_INITDB_ROOT_PASSWORD: "testPassword"  
 
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: root
-      ME_CONFIG_MONGODB_URL: mongodb://mongo-db:27017/
-      ME_CONFIG_BASICAUTH: false
-
   sql-server-db:
     container_name: sql-server-db
     image: mcr.microsoft.com/mssql/server:latest
     ports:
-      - "14330:1433"
+      - "1433:1433"
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-Usa", "-PStrong_password", "-Q", "select 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
     environment:
-      SA_PASSWORD: "Strong_password"
+      MSSQL_SA_PASSWORD: "Strong_password"
+      SQLCMDUSER: "sa"
+      SQLCMDPASSWORD: "Strong_password"
       ACCEPT_EULA: "Y"

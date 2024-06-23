@@ -16,11 +16,11 @@ internal class DockerInfrastructureFixture : IAsyncDisposable
         var msSqlOptions = infrastructureOptions.MsSQLOptions;
         _msSqlContainer = new MsSqlBuilder()
             .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
-                .WithPortBinding(57809, 1433)
-                .WithEnvironment("ACCEPT_EULA", "Y")
-                .WithEnvironment("SQLCMDUSER", msSqlOptions.Username)
-                .WithEnvironment("SQLCMDPASSWORD", msSqlOptions.Password)
-                .WithEnvironment("MSSQL_SA_PASSWORD", msSqlOptions.Password)
+            .WithPortBinding(57809, 1433)
+            .WithEnvironment("ACCEPT_EULA", "Y")
+            .WithEnvironment("SQLCMDUSER", msSqlOptions.Username)
+            .WithEnvironment("SQLCMDPASSWORD", msSqlOptions.Password)
+            .WithEnvironment("MSSQL_SA_PASSWORD", msSqlOptions.Password)
             .Build();
         _msSqlContainer.StartAsync().Wait();
 
